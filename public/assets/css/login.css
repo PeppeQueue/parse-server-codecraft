@@ -102,3 +102,7 @@
     color: #737373;
 	font-size: 11px !important;
 }
+
+.normal {
+    font-weight: 100 !important
+}

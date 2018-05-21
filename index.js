@@ -76,6 +76,10 @@ app.get('/changepassword', function(req, res) {
    res.sendFile(path.join(__dirname, '/public/changePassword.html'));
 });
 
+app.get('/terms', function(req, res) {  
+   res.sendFile(path.join(__dirname, '/public/terms.html'));
+});
+
 
 
 var port = process.env.PORT || 1337;

@@ -78,6 +78,7 @@ Login.clickSignUpButton = function(){
 	var phone = $("#signUpPhone").val();
 	var password = $("#signUpPassword").val();
   var name = $("#signUpName").val();
+  var agreed = $("#signUpTerms").val();
   
 
     var user = new Parse.User();
@@ -86,6 +87,7 @@ Login.clickSignUpButton = function(){
     user.set("email", email);
     user.set("name",name);
     user.set("phone", phone);
+    user.set("termsAgreed", agreed);
 
     var errors = $('#signUpForm').validator('validate').has('.has-error').length;
     if(errors === 0){
