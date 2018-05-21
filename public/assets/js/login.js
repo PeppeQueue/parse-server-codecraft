@@ -78,7 +78,7 @@ Login.clickSignUpButton = function(){
 	var phone = $("#signUpPhone").val();
 	var password = $("#signUpPassword").val();
   var name = $("#signUpName").val();
-  var agreed = $("#signUpTerms").val();
+    var agreed = $("#signUpTerms").is(':checked');
   
 
     var user = new Parse.User();
