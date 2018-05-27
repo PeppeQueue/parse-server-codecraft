@@ -251,7 +251,8 @@ Login.init = function() {
              Parse.User.logIn(email, password).then(
                  function(user) { 
                      $("#loader").css("display","none");    
-                     $("#signInMessage").css("display","block");                    
+                     $("#signInMessage").css("display","block");
+                     $("#signInMessage").text("");
                      window.location.href = "/dashboard";
                  },
                  function(error) { 
