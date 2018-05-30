@@ -565,3 +565,7 @@ footer p a:hover, footer p a:focus:hover {
     font-family: "Montserrat", sans-serif;
     line-height: 30px !important; 
 }
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px #304150 inset !important;
+    -webkit-text-fill-color: #ffffff;
+}

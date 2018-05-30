@@ -21,6 +21,8 @@ Login.init = function() {
     $('#signUpLink').click(function (e) {
         $(this).toggleClass('active');
         e.preventDefault();
+        $( ".form-group" ).removeClass( "hasError" );
+        $(".error").css("display","none");
         $("#signInDiv").hide();
         $("#signUpDiv").show();
         $("#forgotPasswordDiv").hide();
@@ -29,6 +31,8 @@ Login.init = function() {
     $('#signInLink').click(function (e) {
         $(this).toggleClass('active');
         e.preventDefault();
+        $( ".form-group" ).removeClass( "hasError" );
+        $(".error").css("display","none");
         $("#signUpDiv").hide();
          $("#forgotPasswordDiv").hide();
         $("#signInDiv").show();
@@ -37,6 +41,8 @@ Login.init = function() {
     $('#forgotPasswordLink').click(function (e) {
         $(this).toggleClass('active');
         e.preventDefault();
+        $( ".form-group" ).removeClass( "hasError" );
+        $(".error").css("display","none");
         $("#signUpDiv").hide();
         $("#signInDiv").hide();
         $("#forgotPasswordDiv").show();
@@ -280,7 +286,7 @@ Login.init = function() {
              Parse.User.requestPasswordReset(email).then(
                  function() { 
                      $("#forgotPasswordMessage").css("display","block");
-                     $("#forgotPasswordMessage").css("color", "green");
+                     $("#forgotPasswordMessage").css("color", "white");
                      $("#forgotPasswordMessage").text("Password reset link has been sent."); 
                      $("#forgotPasswordLoader").css("display","none");
                  },
