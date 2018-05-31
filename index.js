@@ -54,7 +54,8 @@ var api = new ParseServer({
 	}
     },    
     customPages: {
-        invalidLink: config.PUBLIC_SERVER_URL + 'public/invalid_link.html'
+        invalidLink: config.PUBLIC_SERVER_URL + '/public/invalid_link.html',
+        verifyEmailSuccess: config.PUBLIC_SERVER_URL + '/public/invalid_link.html'
     }
 });
 
