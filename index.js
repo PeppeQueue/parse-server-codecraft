@@ -54,7 +54,7 @@ var api = new ParseServer({
 	}
     },    
     customPages: {
-        invalidLink: process.env..PUBLIC_SERVER_URL + '/public/invalid_link.html',
+        invalidLink: process.env.PUBLIC_SERVER_URL + '/public/invalid_link.html',
         verifyEmailSuccess: process.env.PUBLIC_SERVER_URL + '/public/invalid_link.html',
         choosePassword: process.env.PUBLIC_SERVER_URL + '/public/choose_password.html'
     }
