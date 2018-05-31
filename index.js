@@ -54,9 +54,8 @@ var api = new ParseServer({
 	}
     },    
     customPages: {
-        invalidLink: process.env.PUBLIC_SERVER_URL + 'public/invalid-link.html',
-        verifyEmailSuccess: process.env.PUBLIC_SERVER_URL + 'public/invalid-link.html',
-        choosePassword: process.env.PUBLIC_SERVER_URL + 'public/choose_password.html'
+        invalidLink: process.env.PUBLIC_SERVER_URL + 'invalid-link',
+        verifyEmailSuccess: process.env.PUBLIC_SERVER_URL + 'verify-email-success'
     }
 });
 
@@ -85,6 +84,14 @@ app.get('/terms', function(req, res) {
    res.sendFile(path.join(__dirname, '/public/terms.html'));
 });
 
+
+app.get('/invalid-link', function(req, res) {  
+   res.sendFile(path.join(__dirname, '/public/invalid-link.html'));
+});
+
+app.get('/verify-email-success', function(req, res) {  
+   res.sendFile(path.join(__dirname, '/public/verify-email-success.html'));
+});
 
 
 var port = process.env.PORT || 1337;
