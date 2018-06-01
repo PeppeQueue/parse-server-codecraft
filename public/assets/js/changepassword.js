@@ -107,8 +107,8 @@ ChangePassword.init = function() {
                  function(user) { 
                     console.log(JSON.stringify(user));
                      $("#loader").css("display","none");
-                    $("#changePasswordMessage").css("color", "green");
-                    $("#changePasswordMessage").html("Password Changed Successfully.<br/>Please Login to Continue"); 
+                    $("#changePasswordMessage").css("color", "white");
+                    $("#changePasswordMessage").html("Password Changed Successfully.<br/>Please Sign in to Continue"); 
                     $('.content').hide();
                     $("#signInButton").show();
                     Parse.User.logOut();
