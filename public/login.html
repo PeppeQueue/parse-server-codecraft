@@ -1,4 +1,3 @@
-
 <html lang="en">
 
 <head>
@@ -6,152 +5,345 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="/public/assets/css/login.css">
+
+<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700|Raleway:300,600" rel="stylesheet">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 
 
 <!-- jQuery library -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 
 <!-- Latest compiled JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="https://npmcdn.com/parse/dist/parse.min.js"> </script>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-<script src="/public/assets/js/validator.min.js"> </script>
+<script src="https://npmcdn.com/parse/dist/parse.min.js"> </script>
+
 <script src="/public/assets/js/login.js"> </script>
-<script src="/public/assets/js/config.js"> </script> 
+<script src="/public/assets/js/config.js"> </script>
+<script src="/public/assets/js/validator.js"> </script>
+
 
 
 
 <!------ Include the above in your HEAD tag ---------->
 <script type="text/javascript">
 		$(document).ready(function() {
-			Login.init();
-});
+      Login.init();
+    });
 </script>
 
 </head>
-<div class="container">
-    <div class="row">
-        <div class="col-sm-6 col-md-4 col-md-offset-4" id="loginDiv">
-            
-            <div class="account-wall">
-                
-				<img class="" src="/public/assets/images/peppeq.png" alt="logo">
-				<p class="text-danger" align="center" id="signInMessage"></p>
-				<div class="center-block loader " id="loader"></div>
-				<form class="form-signin" data-toggle="validator" role="form" id="signInForm">
-				
-				<div class="form-group">				
-                <input type="email" id="signInEmail" class="form-control" placeholder="Email" data-error="Invalid email Address" required>
-				 <div class="help-block with-errors"></div>
-				</div>
-				
-				<div class="form-group">
-                <input type="password" id="signInPassword"  class="form-control" placeholder="Password" data-error="Please enter password" required>
-				<div class="help-block with-errors"></div>
-				</div>
-				
-                <button id="signInButton" class="btn btn-lg btn-primary btn-block"  type="reset">
-                    Sign in</button>
-					
-					
-                <label class="checkbox pull-left">                  
-                </label>
-				
-                <a href="#" class="pull-right need-help" id="forgotPasswordLink">Forgot password? </a><span class="clearfix"></span>
-                
-				</form>
-				
-            </div>
-			
-            <a href="#" id="newSignUp" class="text-center new-account">Create Account </a>
-			
-        </div>
-		<div class="col-sm-6 col-md-4 col-md-offset-4" id="signUpDiv">
-           
-            <div class="account-wall">
-                <img class="" src="/public/assets/images/peppeq.png" alt="logo">
-				<p class="text-danger" align="center" id="signUpMessage"></p>
-				<div class="center-block loader" id="signUpLoader"></div>
-				
-                <form class="form-signin" data-toggle="validator" role="form" id="signUpForm">
-				
-				<div class="form-group">
-                <input type="email" id = "signUpEmail" class="form-control"  data-error="Invalid email address" placeholder="Email" required >
-				<div class="help-block with-errors"></div>
-				</div>
-				
-				<div class="form-group">
-				<input type="password" id ="signUpPassword" data-minlength="6" class="form-control" data-error="Please enter password" placeholder="Password" required>
-				<div class="help-block">(Minimum of 6 characters)</div>
-				</div>
-				<div class="form-group">
-				<input type="password" id ="signUpRepeatPassword" data-minlength="6" data-match="#signUpPassword" data-error="Please enter password" data-match-error="Passwords don't match" class="form-control" placeholder="Repeat Password" required>
-				<div class="help-block with-errors"></div>
-				</div>
-				
-				<div class="form-group">
-				<input type="text" id = "signUpName" class="form-control" data-error="Please enter your name" placeholder="Name" required >
-				<div class="help-block with-errors"></div>
-				</div>
-				
-				
-				<div class="form-group">
-				<input type="number" id = "signUpPhone" class="form-control" placeholder="Phone" >
-				<div class="help-block with-errors"></div>
-				</div>
-               
-				
-				
-                <button id="signUpButton" class="btn btn-lg btn-primary btn-block" type="submit">
-                    Sign Up</button>
-                <label class="checkbox pull-left">
-                  
-                </label>
-                
-                </form>
-            </div>
-			   
-             <div><span class="new-account">You already have an account ? <a href="#" id="newLogin" class="text-center"> Sign In </a></span></div>
-        </div>
 
+<div>
 
-
-           <div class="col-sm-6 col-md-4 col-md-offset-4" id="forgotPasswordDiv">
-            
-            <div class="account-wall">
-                
-				<img class="" src="/public/assets/images/peppeq.png" alt="logo">
-				<p class="text-danger" align="center" id="forgotPasswordMessage"></p>
-				<div class="center-block loader " id="forgotPasswordLoader"></div>
-				<form class="form-signin" data-toggle="validator" role="form" id="forgotPasswordForm">
-				
-				<div class="form-group">				
-                <input type="email" id="forgotPasswordEmail" class="form-control" placeholder="Email" data-error="Invalid email Address" required>
-				 <div class="help-block with-errors"></div>
-				</div>
-				
-				
-                <button id="forgotPasswordButton" class="btn btn-lg btn-primary btn-block"  type="reset">
-                    Reset Password</button>
-					
-				
-                
-				</form>
-				
-            </div>
-			
-             <a href="#" id="signInForgotPasswordForm" class="text-center new-account">Sign In </a>
-			
-        </div>
-
-
-
-
-
+ <header class="styles__container__B5y4f" role="navigation">
+     
+	 <nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+     
+	   <a class="logo" href="#" >PEPPE <span>Q</span></a>
+	   
+	 
     </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+     
+     
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#">Plans and Pricing</a></li>
+		    <li><a href="#">Documentation</a></li>
+        <li> <button  class="sign-in">SignIn</button></li>
+
+<!--
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Action</a></li>
+            <li><a href="#">Another action</a></li>
+            <li><a href="#">Something else here</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">Separated link</a></li>
+          </ul>
+        </li>  -->
+
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+</header>
+
+ 
+ 
+ <div class="container">
+
+  
+   <section id="formHolder">
+
+      <div class="row">
+
+         <!-- Brand Box -->
+         <div class="col-sm-6 brand">
+           
+
+            <div class="heading">
+               <a href="#" class="logo">PEPPE <span>Q</span></a>
+               <p>Your Right Choice</p>
+            </div>
+
+            <div class="success-msg">
+               <p>Great! Please confirm your email address to complete your membership.</p>
+               <a href="#" class="profile">SignIn</a>
+            </div>
+         </div>
+
+
+         <!-- Form Box -->
+         <div class="col-sm-6 form" id="signInDiv">
+
+            <!-- Login Form -->
+            <div class="login form-peice" >
+               <form class="login-form" action="#" method="post" id="signInForm">
+                  <div class="form-group" >
+                  <span class="text-error" align="left" id="signInMessage">Invalid Username or Password</span>
+                 </div>
+			        
+                 <div class="center-block loader " id="loader"></div>
+                  <div class="form-group">
+				      
+                     <label for="signInEmail">Email Adderss</label>
+                      <input type="email" name="signInEmail" id="signInEmail" class="signin-email" autocomplete="off" >
+                       <span class="error"></span>
+                  </div>
+                  <div>
+				     <span class="glyphicon glyphicon-envelope label-icon"> </span> 
+				  </div>
+                  <div class="form-group">
+                     <label for="signInPassword"> Password</label>
+                     <input type="password" name="signInPassword" id="signInPassword" class="signin-pass" autocomplete="off" >
+                      <span class="error"></span>
+                  </div>
+				   <div>
+				     <span class="glyphicon glyphicon-wrench label-icon"> </span> 
+				  </div>
+
+                  <div class="CTA">
+                     <input type="submit" value="SignIn" id="signInButton">
+                     <a href="#" class="switch" id="signUpLink">SIGN UP</a>
+                  </div>
+
+                  <div class="CTA">
+                     Having trouble signing in?
+                     <a href="#" class="switch" id="forgotPasswordLink">Reset Your Password</a>
+                  </div>
+               </form>
+            </div><!-- End Login Form -->
+            </div>
+			
+			
+			
+             <div class="col-sm-6 form"  id="signUpDiv">
+            <!-- Signup Form -->
+            <div class="signup form-peice" >
+               <form class="signup-form" action="#" method="post" id="signUpForm">
+                 
+                 <div class="center-block loader " id="signUpLoader"></div>
+                 <div>
+                  <span class="text-error" align="left" id="signUpMessage">Invalid Username or Password</span>
+                 </div>
+                <div class="form-group">
+                   
+                     <label for="signUpEmail">Email Address</label>
+                     <input type="email" name="emailAddress" id="signUpEmail" class="email" autocomplete="off">
+                     <span class="error"></span>
+                  </div>
+                <div>
+                    <span class="glyphicon glyphicon-envelope label-icon"> </span> 
+                </div>
+
+                  <div class="form-group">
+                     <label for="signUpPassword">Password</label>
+                     <input type="password" name="password" id="signUpPassword" class="pass" autocomplete="off">
+                     <span class="error"></span>
+                  </div>
+                <div>
+                    <span class="glyphicon glyphicon-wrench label-icon"> </span> 
+                </div>
+
+                  <div class="form-group">
+                     <label for="signUpRepeatPassword">Confirm Password</label>
+                     <input type="password" name="passwordCon" id="signUpRepeatPassword" class="passConfirm" autocomplete="off" >
+                     <span class="error"></span>
+                  </div>
+                   <div>
+                      <span class="glyphicon glyphicon-wrench label-icon"> </span> 
+                    </div>
+
+
+                  <div class="form-group">
+                     <label for="signUpName">Full Name</label>
+                     <input type="text" name="name" id="signUpName" class="name" autocomplete="off">
+                     <span class="error"></span>
+                  </div>
+				          <div>
+				             <span class="glyphicon glyphicon-user label-icon"> </span> 
+				          </div>
+				  
+
+                  		  
+				  
+                  <div class="form-group">
+                     <label for="signUpPhone">Phone Number - <small>Optional</small></label>
+                     <input type="number" name="phone" id="signUpPhone" autocomplete="off">
+                  </div>
+				          <div>
+				             <span class="glyphicon glyphicon-earphone label-icon"> </span> 
+				          </div>
+
+                  <div class="form-group">
+                     <input type="checkbox" id="signUpTerms" class="label-icon">
+                       <span class="error"></span>
+                    <span class="signupspan">I accept <a  href="/terms" target="_blank">License Agreement</a><span>
+                  
+                  </div>
+                   <div >
+                    
+                  </div>
+
+                
+
+                  <div class="CTA">
+                     <input type="submit" value="Signup Now" id="submit" >
+                     <a href="#" class="switch" id="signInLink">SIGN IN</a>
+                  </div>
+               </form>
+            </div><!-- End Signup Form -->
+			
+			
+         </div>
+
+
+
+           <div class="col-sm-6 form" id="forgotPasswordDiv">
+
+            <!-- Login Form -->
+            <div class="login form-peice" >
+               <form class="forgotpassword-form" action="#" method="post" id="forgotPasswordForm">
+                  <div class="center-block loader " id="forgotPasswordLoader"></div>
+                 <div>
+                  <span class="text-error" align="left" id="forgotPasswordMessage">Invalid Username or Password</span>
+                 </div>
+                  <div class="form-group">
+              
+                     <label for="forgotPasswordEmail">Email Adderss</label>
+                      <input type="email" name="forgotPasswordEmail" id="forgotPasswordEmail" class="forgotpassword-email" autocomplete="off">
+                      <span class="error"></span>
+                  </div>
+                  <div>
+             <span class="glyphicon glyphicon-envelope label-icon"> </span> 
+          </div>
+                 
+
+                  <div class="CTA">
+                     <input type="submit" value="Reset Password" id="forgotPasswordButton">
+                      <a href="#" class="switch" id="signInForgotPasswordForm">SIGN IN</a>
+                  </div>
+
+                  <div class="CTA">
+                     
+                   
+                  </div>
+               </form>
+            </div><!-- End Login Form -->
+            </div>
+
+
+
+      </div>
+
+   </section>
+  
+
+</div>
+
+
+<!-- Footer -->
+  <section id="footer">
+    <div class="container">
+      <div class="row text-center text-xs-center text-sm-left text-md-left">
+        <div class="col-xs-12 col-sm-3 col-md-3">
+          <h5>COMPANY</h5>
+          <ul class="list-unstyled quick-links">
+            <li><a href="javascript:void();"><i class=""></i>PeppeQ</a></li>
+            <li><a href="javascript:void();"><i class=""></i>Blog</a></li>
+            <li><a href="javascript:void();"><i class=""></i>Case Studies</a></li>           
+            <li><a href="javascript:void();"><i class=" "></i>Videos</a></li>
+          </ul>
+        </div>
+        <div class="col-xs-12 col-sm-3 col-md-3">
+          <h5>PRODUCTS</h5>
+          <ul class="list-unstyled quick-links">
+            <li><a href="javascript:void();"><i class=" "></i>Pricing</a></li>
+            <li><a href="javascript:void();"><i class=" "></i>Plans</a></li>
+            <li><a href="javascript:void();"><i class=" "></i>Features</a></li>
+           
+          
+          </ul>
+        </div>
+        <div class="col-xs-12 col-sm-3 col-md-3">
+          <h5>SUPPORT</h5>
+          <ul class="list-unstyled quick-links">
+            <li><a href="javascript:void();"><i class=" "></i>FAQ</a></li>
+            <li><a href="javascript:void();"><i class=" "></i>Documentation</a></li>
+            <li><a href="javascript:void();"><i class=" "></i>Email</a></li>
+            
+          </ul>
+        </div>
+         <div class="col-xs-12 col-sm-3 col-md-3">
+          <h5>CONATCT</h5>
+          <ul class="list-unstyled quick-links">
+            <li><a href="javascript:void();"><i class=" "></i>Sales</a></li>
+            <li><a href="javascript:void();"><i class=" "></i>About</a></li>
+            <li><a href="javascript:void();"><i class=" "></i>Info</a></li>
+       
+            
+          </ul>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-5">
+          <ul class="list-unstyled list-inline social text-center">
+            <li class="list-inline-item"><a href="javascript:void();"><i class="fab fa-facebook-f"></i></a></li>
+            <li class="list-inline-item"><a href="javascript:void();"><i class="fab fa-twitter"></i></a></li>
+            <li class="list-inline-item"><a href="javascript:void();"><i class="fab fa-instagram"></i></a></li>
+            <li class="list-inline-item"><a href="javascript:void();"><i class="fab fa-google-plus-g"></i></a></li>
+            <li class="list-inline-item"><a href="javascript:void();" target="_blank"><i class="fa fa-envelope"></i></a></li>
+          </ul>
+        </div>
+        </hr>
+      </div>  
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-2 text-center text-white">
+          
+          <p class="h6">PEPPEQ 2018 &copy All right Reversed.</p>
+        </div>
+        </hr>
+      </div>  
+    </div>
+  </section>
+
+
+
 </div>
 
 </html>

@@ -1,34 +1,158 @@
+/*global $, document, window, setTimeout, navigator, console, location*/
 function ChangePassword(){
-	
+    
 }
 
+var currentPasswordError =true,
+    repeatPasswordError = true,
+    newPasswordError = true;
+
+
 ChangePassword.init = function() {
-	$('#changePasswordForm').validator();
-  $("#changePasswordLoader").css("display","none");
-
-  $("#currentPassword").unbind('change');
+  
+  $("#loader").css("display","none");
+  $("#changePasswordMessage").text("");  
+  $("#currentPassword").unbind('change'); 
   $("#currentPassword").change(ChangePassword.onCompleteCurrentPassword);
+  $("#signInButton").hide();
 
-  $('#changePasswordButton').click(ChangePassword.clickChangePasswordButton);
+  $("#signInButton").click(ChangePassword.onClickSignIn);
+
+
+  //$('#changePasswordButton').click(ChangePassword.clickChangePasswordButton);
+
+
+
+
+  $('input').focus(function () {
+
+        $(this).siblings('label').addClass('active');
+    });
+
+    if (navigator.userAgent.toLowerCase().indexOf('firefox') > -1) {
+        $('.form form label').addClass('fontSwitch');
+    }
+
+
+  $('input').blur(function () {
+        
+        // User Name
+        if ($(this).hasClass('current-password')) {
+            if ($(this).val().length < 1) {
+                $(this).siblings('span.error').text('Please type your current password').fadeIn().parent('.form-group').addClass('hasError');
+               
+            } else {
+                $(this).siblings('.error').text('').fadeOut().parent('.form-group').removeClass('hasError');
+                
+            }
+        }
+        // Email
+        if ($(this).hasClass('new-password')) {
+            if ( $(this).val().length < 6 ) {
+                $(this).siblings('span.error').text('Please type at least 6 characters').fadeIn().parent('.form-group').addClass('hasError');
+                newPasswordError = true;
+            } else {
+                $(this).siblings('.error').text('').fadeOut().parent('.form-group').removeClass('hasError');
+                newPasswordError = false;
+            }
+        }
+
+        // PassWord
+        if ($(this).hasClass('repeat-password')) {
+            if ($('.new-password').val() !== $('.repeat-password').val()) {
+                $(this).siblings('span.error').text('Passwords don\'t match').fadeIn().parent('.form-group').addClass('hasError');
+                repeatPasswordError = true;
+            } else {
+                $(this).siblings('.error').text('').fadeOut().parent('.form-group').removeClass('hasError');
+                repeatPasswordError = false;
+            }
+        }
+
+        
+
+        if ($(this).val().length > 0) {            
+            $(this).siblings('label').addClass('active');
+        } else {
+            $(this).siblings('label').removeClass('active');
+        }
+       
+       
+       
+
+     
+    });
+
+
+
+  
+
+
+    $('form.login-form').submit(function (event) {
+        
+        event.preventDefault();
+
+        if (currentPasswordError == true || newPasswordError == true  || repeatPasswordError ==true) {
+            $('.current-password, .new-password,.repeat-password').blur();
+        } else {
+             var currentUser = Parse.User.current();
+             var newPassword = $("#newPassword").val();
+             var repeatPassword = $("#repeatPassword").val();
+             
+            
+            if((newPassword == repeatPassword ) &&  !currentPasswordError){
+                $("#loader").css("display","block");
+                currentUser.set('password',newPassword);
+            
+              currentUser.save(null).then(
+                 function(user) { 
+                    console.log(JSON.stringify(user));
+                     $("#loader").css("display","none");
+                    $("#changePasswordMessage").css("color", "white");
+                    $("#changePasswordMessage").html("Password Changed Successfully.<br/>Please Sign in to Continue"); 
+                    $('.content').hide();
+                    $("#signInButton").show();
+                    Parse.User.logOut();
+                    // window.location.href = "/dashboard";
+                 },
+                 function(error) { 
+                     $("#loader").css("display","none");
+                    console.log(JSON.stringify(error));
+                    $("#changePasswordMessage").css("color", "red");
+                    $("#changePasswordMessage").text("Error changing password."); 
+                }
+             ); 
+
+           }else{
+              $("#changePasswordMessage").css("color", "red");
+              $("#changePasswordMessage").text("Please enter required details."); 
+           }
+        }
+    });
+
+
+
+
 }
 
 ChangePassword.onCompleteCurrentPassword = function(){
   var currentUser = Parse.User.current();
   var email = currentUser.get('email');
   var password = $("#currentPassword").val();
-  $("#changePasswordLoader").css("display","block");
+  $("#loader").css("display","block");
   Parse.User.logIn(email, password, {
       success: function(user) {
-         $("#changePasswordLoader").css("display","none");
+         $("#loader").css("display","none");
          console.log(JSON.stringify(user));
-         $("#changePasswordMessage").text("");  
+         $("#changePasswordMessage").text(""); 
+         currentPasswordError = false; 
 
       },
       error: function(user, error) {
-         $("#changePasswordLoader").css("display","none");
+         $("#loader").css("display","none");
          console.log("Error: " + error.code + " " + error.message);
          if(error.code == 101){
             $("#changePasswordMessage").text("Your current password is not matched");  
+            currentPasswordError = true; 
          }
                
 
@@ -36,58 +160,6 @@ ChangePassword.onCompleteCurrentPassword = function(){
     });
 }
 
-ChangePassword.clickChangePasswordButton = function(){
-  var currentUser = Parse.User.current();
-  var email = currentUser.get('email');
-  var password = $("#currentPassword").val();
-  $("#changePasswordLoader").css("display","block");
-  var currentPasswordVerified = false;
-  Parse.User.logIn(email, password, {
-      success: function(user) {
-         $("#changePasswordLoader").css("display","none");
-         console.log(JSON.stringify(user));
-         $("#changePasswordMessage").text("");  
-         currentPasswordVerified = true;
-
-      },
-      error: function(user, error) {
-         $("#changePasswordMessage").css("color", "red");
-         $("#changePasswordLoader").css("display","none");
-         console.log("Error: " + error.code + " " + error.message);
-         if(error.code == 101){
-            $("#changePasswordMessage").text("Your current password is not matched");  
-         }
-               
-
-      }
-    });
-
-    var newPassword = $("#newPassword").val();
-    var repeatPassword = $("#repeatPassword").val();
-
-    var errors = $('#changePasswordForm').validator('validate').has('.has-error').length;
-    console.log(errors);
-    if(errors === 0){
-      if((newPassword == repeatPassword) ){
-      currentUser.set('password',newPassword);
-      currentUser.save(null,{success:function(obj){
-               console.log(JSON.stringify(obj));
-              $("#changePasswordMessage").css("color", "green");
-              $("#changePasswordMessage").text("Password Changed Successfully."); 
-         },error:function(obj,err){
-              console.log(JSON.stringify(err));
-              $("#changePasswordMessage").css("color", "red");
-              $("#changePasswordMessage").text("Error changing password."); 
-         }
-    });
-    }else{
-        $("#changePasswordMessage").css("color", "red");
-        $("#changePasswordMessage").text("Please enter required details."); 
-    }
-    }
-
-    
-    
+ChangePassword.onClickSignIn = function(){
+    window.location.href = "/"
 }
-
-

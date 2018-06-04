@@ -52,6 +52,11 @@ var api = new ParseServer({
 		}
 	    }
 	}
+    },    
+    customPages: {
+        invalidLink: process.env.PUBLIC_SERVER_URL + 'invalid-link',
+        verifyEmailSuccess: process.env.PUBLIC_SERVER_URL + 'verify-email-success',
+        passwordResetSuccess: process.env.PUBLIC_SERVER_URL + 'password-rest-success'
     }
 });
 
@@ -76,7 +81,22 @@ app.get('/changepassword', function(req, res) {
    res.sendFile(path.join(__dirname, '/public/changePassword.html'));
 });
 
+app.get('/terms', function(req, res) {  
+   res.sendFile(path.join(__dirname, '/public/terms.html'));
+});
 
+
+app.get('/invalid-link', function(req, res) {  
+   res.sendFile(path.join(__dirname, '/public/invalid-link.html'));
+});
+
+app.get('/verify-email-success', function(req, res) {  
+   res.sendFile(path.join(__dirname, '/public/verify-email-success.html'));
+});
+
+app.get('/password-rest-success', function(req, res) {  
+   res.sendFile(path.join(__dirname, '/public/password-rest-success.html'));
+});
 
 var port = process.env.PORT || 1337;
 var httpServer = require('http').createServer(app);
