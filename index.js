@@ -98,6 +98,10 @@ app.get('/password-rest-success', function(req, res) {
    res.sendFile(path.join(__dirname, '/public/password-rest-success.html'));
 });
 
+app.get('/pricing', function(req, res) {  
+	res.sendFile(path.join(__dirname, '/public/pricing.html'));
+ });
+
 var port = process.env.PORT || 1337;
 var httpServer = require('http').createServer(app);
 httpServer.listen(port, function () {
