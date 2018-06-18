@@ -12,7 +12,8 @@ Dashboard.init = function() {
   } else {
      window.location.href = "/";
   }
-	$('#logoutLink').click(Dashboard.clickLogoutLink);
+  $('#logoutLink').click(Dashboard.clickLogoutLink);
+  Dashboard.initConfigurations();
 }
 
 Dashboard.clickLogoutLink = function(){
@@ -21,4 +22,13 @@ Dashboard.clickLogoutLink = function(){
        console.log(currentUser);
        window.location.href = "/";
     });
+}
+
+Dashboard.initConfigurations = function(){
+  Parse.Config.get().then(function(config) {
+    var dashboardMessage = config.get("dashboardMessage");
+    $("#dashboardMessage").text(dashboardMessage);    
+  }, function(error) {
+    
+  });
 }
