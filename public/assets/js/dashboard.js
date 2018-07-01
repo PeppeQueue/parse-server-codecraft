@@ -27,6 +27,7 @@ Dashboard.clickLogoutLink = function(){
 Dashboard.initConfigurations = function(){
   Parse.Config.get().then(function(config) {
     var dashboardMessage = config.get("dashboardMessage");
+    var text = "";
     $("#dashboardMessage").text(dashboardMessage);    
   }, function(error) {
     
