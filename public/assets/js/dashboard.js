@@ -6,6 +6,9 @@ Dashboard.init = function() {
 	Parse.initialize(Config.PARSE_APP_ID);
   Parse.serverURL = Config.PARSE_SERVER_URL;
 	var currentUser = Parse.User.current();
+  $('.main').hide();
+  $('#restaurant-container').show();
+
   if (currentUser) {
       console.log(JSON.stringify(currentUser))
       $("#usernameLabel").html(currentUser.get("name") + "<span class='caret'></span>");
