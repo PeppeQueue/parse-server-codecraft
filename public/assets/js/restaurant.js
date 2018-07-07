@@ -349,10 +349,11 @@ Restaurant.loadCuisine = function(){
 }
 
 Restaurant.clickAddRestaurantIcon = function () {
-    $("#name,#description,#note,#contact,#zipcode,#addressline1,#addressline2").siblings('label').removeClass('active');
-    $("#name,#description,#note,#contact,#zipcode,#addressline1,#addressline2").val("");
+    $("#name,#description,#note,#zipcode,#city,#addressline1,#addressline2,#contactName,#contactPhone,#contactEmail").siblings('label').removeClass('active');
+    $("#name,#description,#note,#zipcode,#city,#addressline1,#addressline2,#contactName,#contactPhone,#contactEmail").val("");
     $("#country").val(-1);
-    $("#state").val(-1)
+    $("#state").val(-1);
+    $("#cuisine").val(-1);    
     $('.empty').hide();
     $('.form-peice').show();
     $('#createRestaurantButton').show();
