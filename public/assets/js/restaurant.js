@@ -156,6 +156,11 @@ Restaurant.init = function () {
             
             var RestaurantBiz = Parse.Object.extend("RestaurantBiz");
             var restaurant = new RestaurantBiz();
+            var id = $("#id").val();
+            
+            if(id){
+                restaurant.id = id;
+            }
 
             var name = $("#name").val();
             var description = $("#description").val();
@@ -186,11 +191,7 @@ Restaurant.init = function () {
             // var relation = restaurantBizContact.relation("restaurantBiz")
             // relation.add(restaurant);
 
-            var id = $("#id").val();
             
-            if(id){
-                restaurant.set('id', id);
-            }
             
             var RestaurantBizAddress = Parse.Object.extend("RestaurantBizAddress");
             var restaurantBizAddress = new RestaurantBizAddress();
