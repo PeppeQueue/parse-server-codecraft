@@ -8,7 +8,7 @@ Menu.init = function () {
     var currentUser = Parse.User.current();
 
     var items = '';
-    for (var i = 0; i < 10; i++) {
+    for (var i = 0; i < 2; i++) {
         var id = i;
         var name = "Menu" + i;
         items += '<li class="list-group-item"  data-containerID=' + id
