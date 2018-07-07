@@ -180,6 +180,12 @@ Restaurant.init = function () {
             
             var RestaurantBizContact = Parse.Object.extend("RestaurantBizContact");
             var restaurantBizContact = new RestaurantBizContact();
+            var cId = $("#contactId").val();
+            
+            if(cId){
+                restaurantBizContact.id = cId;
+            }
+
             var contactName = $("#contactName").val();
             var contactPhone = $("#contactPhone").val();
             var contactEmail = $("#contactEmail").val();
@@ -195,6 +201,12 @@ Restaurant.init = function () {
             
             var RestaurantBizAddress = Parse.Object.extend("RestaurantBizAddress");
             var restaurantBizAddress = new RestaurantBizAddress();
+            
+            var aId = $("#addressId").val();
+            
+            if(aId){
+                restaurantBizAddress.id = aId;
+            }
             
             var country = $("#country").val();
             var state = $("#state").val();
@@ -280,8 +292,10 @@ Restaurant.loadRestaurants = function () {
                 var zipcode = object.get("address").get("zipCode");  
                 var city = object.get("address").get("city");
                 var addressline1 = object.get("address").get("addressLine1");
+                var addressId = object.get("address").id;
                 var addressline2 = object.get("address").get("addressLine2");
 
+                var contactId = object.get("contact").id;
                 var contactName = object.get("contact").get("name");
                 var phone = object.get("contact").get("phone");
                 var email = object.get("contact").get("email");
@@ -289,6 +303,8 @@ Restaurant.loadRestaurants = function () {
                 console.log(name);
                 items += '<li class="list-group-item"  data-description="' + description +'"'
                     + ' data-id=' + id + ' data-note="' + note + '"'
+                    + ' data-contactId=' + contactId 
+                    + ' data-addressId=' + addressId 
                     + ' data-zipcode="' + zipcode +'"'
                     + ' data-cuisine="' + cuisine +'"'
                     + ' data-active="' + active +'"'
@@ -363,6 +379,9 @@ Restaurant.clickAddRestaurantIcon = function () {
     $("#country").val(-1);
     $("#state").val(-1);
     $("#cuisine").val(-1);    
+    $("#id").val("");  
+    $("#contactId").val("");   
+    $("#addressId").val("");    
     $('.empty').hide();
     $('.form-peice').show();
     $('#createRestaurantButton').show();
@@ -389,6 +408,8 @@ Restaurant.selectRestaurant = function(e){
 
         // Fill item details
          $("#id").val($(this).attr("data-id"));
+         $("#contactId").val($(this).attr("data-contactId"));
+         $("#addressId").val($(this).attr("data-addressId"));
          $("#name").focus();
          $("#name").val($(this).attr("data-name"));
          $("#description").focus();
