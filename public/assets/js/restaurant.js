@@ -153,7 +153,7 @@ Restaurant.init = function () {
         || contactNameError == true|| cityError == true || zipCodeError == true) {
             $('.create-name, .create-description, .create-contact, .create-country,.create-state,.create-addressline1,.label-icon,.create-zipcode,.create-city,.create-contactName').blur();
         } else {
-            console.log("RestaurantBiz created");
+            
             var RestaurantBiz = Parse.Object.extend("RestaurantBiz");
             var restaurant = new RestaurantBiz();
 
@@ -324,13 +324,13 @@ Restaurant.loadCuisine = function(){
             for (var i = 0; i < results.length; i++) {
                 var object = results[i];
                 var id = object.id;
-                console.log(id);
+                
                 var name = object.get("name");
                 var display = object.get("display");
                 	
                 items += '<option  value=' + id + ' data-name=' + name 
                     + '>' + display +  '</option>';  
-                    console.log(items);             
+                            
                
             }
             $('#cuisine').empty();
