@@ -212,6 +212,7 @@
           </div>
           <!-- Login Form -->
           <div class="create form-peice" style="display: none">
+            <div class="col-sm">
             <form class="basic-form" action="#" method="post" id="createForm">
               
               <div class="form-group">
@@ -230,7 +231,7 @@
               </div>
 
               <div class="form-group">
-                <label for="description"> Discription</label>
+                  <label for="description"> Description</label>
                 <input type="text" name="description" id="description" class="create-description" autocomplete="off">
                 <span class="error"></span>
               </div>
@@ -250,28 +251,46 @@
               </div>
 
               <div class="form-group">
-                <label for="contact"> Contact</label>
-                <input type="text" name="contact" id="contact" class="create-contact" autocomplete="off">
+                    <label for="cuisine" class="active"> Cuisine - OPTIONAL</label>
+                    <select class="form-control create-cuisine" id="cuisine" name="cuisine"></select>
                 <span class="error"></span>
               </div>
               <div>
-                <span class="glyphicon glyphicon-earphone label-icon"> </span>
+                    <span class="glyphicon glyphicon-list-alt label-icon"> </span>
+                  </div>
+                
+                  <div class="form-group">
+                      <label for="active" > MAKE RESTAURANT ACTIVE
+                        </label>
+                     
+                      <span class="error"></span>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="retaurantActive" class="label-icon">
               </div>
 
+
+                  
 
               <div class="CTA">
                 <input type="submit" value="CREATE" id="createRestaurantButton">
                
               </div>
               <div class="CTA edit-button">                 
-                  <input type="submit" value="EDIT" id="editRestaurantButton">
+                  <input type="submit" value="SAVE" id="editRestaurantButton">
                 </div>
 
 
 
             </form>
+            </div>
 
+            <div class="col-sm">
             <form class="address-form" action="#" method="post" id="signInForm2">
+
+                <div class="form-group">
+                  <span class="text-white" align="left" id="locationLabel">Restaurant Location </span>
+                </div>
               <div class="form-group">
                 <label for="country" class="active"> Country</label>
                 <select class="form-control create-country" id="country" name="country"></select>
@@ -291,8 +310,17 @@
               </div>
 
               <div class="form-group">
-                <label for="zipcode">ZipCode -
-                  <small>Optional</small>
+                    <label for="city">City</label>
+                    <input type="text" name="city" id="city" class="create-city" autocomplete="off">
+                    <span class="error"></span>
+                  </div>
+                  <div>
+                    <span class="glyphicon glyphicon-pushpin label-icon"> </span>
+                  </div>
+
+                <div class="form-group">
+                  <label for="zipcode">ZipCode
+                    
                 </label>
                 <input type="text" name="zipcode" id="zipcode" class="create-zipcode" autocomplete="off">
                 <span class="error"></span>
@@ -324,7 +352,53 @@
               </div>
 
             </form>
+            </div>
 
+            <div class="col-sm">
+              <form class="contact-form" action="#" method="post" id="signInForm3">
+
+                  <div class="form-group">
+                      <span class="text-white" align="left" id="contactLabel">Restaurant Contact </span>
+                    </div>
+               
+
+                <div class="form-group">
+                  <label for="contactName">Contact Name
+                    
+                  </label>
+                  <input type="text" name="contactName" id="contactName" class="create-contactName" autocomplete="off">
+                  <span class="error"></span>
+                </div>
+                <div>
+                  <span class="glyphicon glyphicon-user label-icon"> </span>
+                </div>
+
+
+
+                <div class="form-group">
+                  <label for="contactPhone">Phone -
+                  <small>Optional</small>
+                </label>
+                  <input type="text" name="contactPhone" id="contactPhone" class="create-contactPhone" autocomplete="off">
+                  <span class="error"></span>
+                </div>
+                <div>
+                  <span class="glyphicon glyphicon-phone label-icon"> </span>
+                </div>
+
+                <div class="form-group">
+                  <label for="contactEmail"> Email -
+                    <small>Optional</small>
+                  </label>
+                  <input type="text" name="contactEmail" id="contactEmail" class="create-contactEmail" autocomplete="off">
+                  <span class="error"></span>
+                </div>
+                <div>
+                  <span class="glyphicon glyphicon-envelope label-icon"> </span>
+                </div>
+
+              </form>
+            </div>
 
 
           </div>

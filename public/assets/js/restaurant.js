@@ -4,9 +4,8 @@ function Restaurant() {
 }
 
 Restaurant.init = function () {
-    var nameError = true,
+    var nameError = true,contactNameError =true,cityError =true,zipCodeError = true,
         descriptionError = true,
-        contactError = true,
         countryError = true,
         stateError = true,
         addressLine1Error = true; 
@@ -18,6 +17,7 @@ Restaurant.init = function () {
     var currentUser = Parse.User.current();
     $('#editRestaurantButton').hide();
     Restaurant.loadRestaurants();
+    Restaurant.loadCuisine();
 
     $('#addRestaurantIcon').click(Restaurant.clickAddRestaurantIcon);
     $('#deleteRestaurantButton').click(Restaurant.clickDeleteRestaurantIcon);
@@ -55,16 +55,7 @@ Restaurant.init = function () {
             }
         }
 
-        // Restaurant Contact
-        if ($(this).hasClass('create-contact')) {
-            if ($(this).val().length == '') {
-                $(this).siblings('span.error').text('Please type your restaurant contact number').fadeIn().parent('.form-group').addClass('hasError');
-                contactError = true;
-            } else {
-                $(this).siblings('.error').text('').fadeOut().parent('.form-group').removeClass('hasError');
-                contactError = false;
-            }
-        }
+       
 
 
         // Restaurant Contact
@@ -75,6 +66,36 @@ Restaurant.init = function () {
             } else {
                 $(this).siblings('.error').text('').fadeOut().parent('.form-group').removeClass('hasError');
                 addressLine1Error = false;
+            }
+        }
+
+        if ($(this).hasClass('create-city')) {
+            if ($(this).val().length == '') {
+                $(this).siblings('span.error').text('Please type city of the restaurant').fadeIn().parent('.form-group').addClass('hasError');
+                cityError = true;
+            } else {
+                $(this).siblings('.error').text('').fadeOut().parent('.form-group').removeClass('hasError');
+                cityError = false;
+            }
+        }
+
+        if ($(this).hasClass('create-zipcode')) {
+            if ($(this).val().length == '') {
+                $(this).siblings('span.error').text('Please type zipcode of the restaurant').fadeIn().parent('.form-group').addClass('hasError');
+                zipCodeError = true;
+            } else {
+                $(this).siblings('.error').text('').fadeOut().parent('.form-group').removeClass('hasError');
+                zipCodeError = false;
+            }
+        }
+
+        if ($(this).hasClass('create-contactName')) {
+            if ($(this).val().length == '') {
+                $(this).siblings('span.error').text('Please type contact persons name').fadeIn().parent('.form-group').addClass('hasError');
+                contactNameError = true;
+            } else {
+                $(this).siblings('.error').text('').fadeOut().parent('.form-group').removeClass('hasError');
+                contactNameError = false;
             }
         }
 
@@ -117,49 +138,82 @@ Restaurant.init = function () {
 
 
 
+
+
     });
 
 
     $('form.basic-form').submit(function (event) {
 
         event.preventDefault();
-        console.log("clicked");
 
 
-        if (nameError == true || descriptionError == true || contactError == true || addressLine1Error == true || countryError == true || stateError == true) {
-            $('.create-name, .create-description, .create-contact, .create-country,.create-state,.create-addressline1,.label-icon').blur();
+
+        if (nameError == true || descriptionError == true || addressLine1Error == true || countryError == true || stateError == true
+        || contactNameError == true|| cityError == true || zipCodeError == true) {
+            $('.create-name, .create-description, .create-contact, .create-country,.create-state,.create-addressline1,.label-icon,.create-zipcode,.create-city,.create-contactName').blur();
         } else {
-            var Restaurant1 = Parse.Object.extend("Restaurant");
-            var restaurant = new Restaurant1();
+            console.log("RestaurantBiz created");
+            var RestaurantBiz = Parse.Object.extend("RestaurantBiz");
+            var restaurant = new RestaurantBiz();
 
             var name = $("#name").val();
             var description = $("#description").val();
             var note = $("#note").val();
-            var contact = $("#contact").val();
-            var country = $("#country").val();
-            var state = $("#state").val();
-            var zipcode = $("#zipcode").val();
-            var addressline1 = $("#addressline1").val();
-            var addressline2 = $("#addressline2").val();
+            var cuisine = $("#cuisine").val();
+            var restaurantActive = $("#restaurantActive").is(':checked');
+            
+            restaurant.set('name', name);
+            restaurant.set('description', description);
+            restaurant.set('note', note);
+            restaurant.set("owner", { "__type": "Pointer", "className": "_User", "objectId": Parse.User.current().id });
+             
+            //restaurant.set("owner",);
+            
+
+            
+            var RestaurantBizContact = Parse.Object.extend("RestaurantBizContact");
+            var restaurantBizContact = new RestaurantBizContact();
+            var contactName = $("#contactName").val();
+            var contactPhone = $("#contactPhone").val();
+            var contactEmail = $("#contactEmail").val();
+
+            
+            restaurantBizContact.set("name",contactName);
+            restaurantBizContact.set("phone",contactPhone);
+            restaurantBizContact.set("email",contactEmail);
+            // var relation = restaurantBizContact.relation("restaurantBiz")
+            // relation.add(restaurant);
+
             var id = $("#id").val();
             
             if(id){
                 restaurant.set('id', id);
             }
             
+            var RestaurantBizAddress = Parse.Object.extend("RestaurantBizAddress");
+            var restaurantBizAddress = new RestaurantBizAddress();
+            
+            var country = $("#country").val();
+            var state = $("#state").val();
+            var city = $("#city").val();
+            var zipcode = $("#zipcode").val();
+            var addressline1 = $("#addressline1").val();
+            var addressline2 = $("#addressline2").val();
+            
+            restaurantBizAddress.set('country', country);
+            restaurantBizAddress.set('state', state);
+            restaurantBizAddress.set('zipCode', zipcode);
+            restaurantBizAddress.set('city', city);
+            restaurantBizAddress.set('addressLine1', addressline1);
+            restaurantBizAddress.set('addressLine2', addressline2);
 
-            restaurant.set('name', name);
-            restaurant.set('description', description);
-            restaurant.set('note', note);
-            restaurant.set('contact', contact);
-            restaurant.set('country', country);
-            restaurant.set('state', state);
-            restaurant.set('zipcode', zipcode);
-            restaurant.set('addressline1', addressline1);
-            restaurant.set('addressline2', addressline2);
+            
+            restaurant.set("contact",restaurantBizContact);
+            restaurant.set("address",restaurantBizAddress);
 
 
-            restaurant.set("user", { "__type": "Pointer", "className": "_User", "objectId": Parse.User.current().id });
+
             NProgress.start();
             restaurant.save(null).then(
                 function (res) {
@@ -193,9 +247,11 @@ Restaurant.init = function () {
 
 Restaurant.loadRestaurants = function () {
     
-    var Restaurant1 = Parse.Object.extend("Restaurant");
-    var query = new Parse.Query(Restaurant1);
-    query.equalTo("user", { "__type": "Pointer", "className": "_User", "objectId": Parse.User.current().id });
+    var restaurantBiz = Parse.Object.extend("RestaurantBiz");
+    var query = new Parse.Query(restaurantBiz);
+    query.equalTo("owner", { "__type": "Pointer", "className": "_User", "objectId": Parse.User.current().id });
+    query.include("contact");
+    query.include("address");
     NProgress.start();
 
     
@@ -210,18 +266,26 @@ Restaurant.loadRestaurants = function () {
                 var name = object.get("name");
                 var description = object.get("description");
                 var note = object.get("note");
-                var contact = object.get("contact");
-                var country = object.get("country");
-                var state = object.get("state");
-                var zipcode = object.get("zipcode");
-                var addressline1 = object.get("addressline1");
-                var addressline2 = object.get("addressline2");
+                
+               
+                var country = object.get("address").get("country");
+                var state = object.get("address").get("state");   
+                var zipcode = object.get("address").get("zipCode");  
+                var city = object.get("address").get("city");
+                var addressline1 = object.get("address").get("addressLine1");
+                var addressline2 = object.get("address").get("addressLine2");
+
+                var contactName = object.get("contact").get("name");
+                var phone = object.get("contact").get("phone");
+                var email = object.get("contact").get("email");
 
                 console.log(name);
                 items += '<li class="list-group-item"  data-description="' + description +'"'
                     + ' data-id=' + id + ' data-note="' + note + '"'
-                    + ' data-zipcode="' + zipcode +'"'+ ' data-contact=' + contact
+                    + ' data-zipcode="' + zipcode +'"'
                     + ' data-country="' + country + '"' + ' data-state="' + state + '"'
+                    + ' data-city="' + city + '"' + ' data-contactName="' + contactName + '"'
+                    + ' data-phone="' + phone + '"' + ' data-email="' + email + '"'
                     + ' data-addressline1="' + addressline1 +'"' + ' data-addressline2="' + addressline2 + '"'
                     + ' data-name="' + name
                     + '"><input type="checkbox" class="checkboxes">' + name
@@ -243,6 +307,45 @@ Restaurant.loadRestaurants = function () {
         }
     );
 
+}
+
+Restaurant.loadCuisine = function(){
+    var cuisine = Parse.Object.extend("Cuisine");
+    var query = new Parse.Query(cuisine);
+    
+    NProgress.start();
+
+    
+    query.find().then(
+        function (results) {
+            console.log("retrieved cuisine" + results.length);
+            var items = '';
+            items += '<option  value=-1 >Select</option>'; 
+            for (var i = 0; i < results.length; i++) {
+                var object = results[i];
+                var id = object.id;
+                console.log(id);
+                var name = object.get("name");
+                var display = object.get("display");
+                	
+                items += '<option  value=' + id + ' data-name=' + name 
+                    + '>' + display +  '</option>';  
+                    console.log(items);             
+               
+            }
+            $('#cuisine').empty();
+            $('#cuisine').append(items);
+            
+            setTimeout(function(){NProgress.done();},100); 
+
+            
+        },
+        function (error) {
+            console.log("error"); 
+            setTimeout(function(){NProgress.done();},100);          
+
+        }
+    );
 }
 
 Restaurant.clickAddRestaurantIcon = function () {
@@ -282,8 +385,10 @@ Restaurant.selectRestaurant = function(e){
          $("#description").val($(this).attr("data-description"));
          $("#note").focus();
          $("#note").val($(this).attr("data-note"));
-         $("#contact").focus();
-         $("#contact").val($(this).attr("data-contact"));
+
+
+         
+        
          $("#country").focus();
          $("#country").val($(this).attr("data-country"));
          $("#country").change();
@@ -291,10 +396,21 @@ Restaurant.selectRestaurant = function(e){
          $("#state").val($(this).attr("data-state"));
          $("#zipcode").focus();
          $("#zipcode").val($(this).attr("data-zipcode"));
+         $("#city").focus();
+         $("#city").val($(this).attr("data-city"));         
          $("#addressline1").focus();
          $("#addressline1").val($(this).attr("data-addressline1"));
          $("#addressline2").focus();
          $("#addressline2").val($(this).attr("data-addressline2"));
+		
+         $("#contactName").focus();
+         $("#contactName").val($(this).attr("data-contactName"));
+         $("#contactPhone").focus();
+         $("#contactPhone").val($(this).attr("data-phone"));
+
+         $("#contactEmail").focus();
+         $("#contactEmail").val($(this).attr("data-email"));
+		
 		
 
 		
