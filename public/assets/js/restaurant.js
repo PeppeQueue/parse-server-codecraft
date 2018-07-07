@@ -168,8 +168,9 @@ Restaurant.init = function () {
             restaurant.set('note', note);
             restaurant.set("owner", { "__type": "Pointer", "className": "_User", "objectId": Parse.User.current().id });
              
-            //restaurant.set("owner",);
-            
+            if(cuisine != -1){
+                restaurant.set("cuisine", { "__type": "Pointer", "className": "Cuisine", "objectId": cuisine });
+            }
 
             
             var RestaurantBizContact = Parse.Object.extend("RestaurantBizContact");
@@ -252,6 +253,7 @@ Restaurant.loadRestaurants = function () {
     query.equalTo("owner", { "__type": "Pointer", "className": "_User", "objectId": Parse.User.current().id });
     query.include("contact");
     query.include("address");
+    query.include("cuisine");
     NProgress.start();
 
     
@@ -266,6 +268,9 @@ Restaurant.loadRestaurants = function () {
                 var name = object.get("name");
                 var description = object.get("description");
                 var note = object.get("note");
+                var cuisine = -1;
+                if(object.get("cuisine"))
+                cuisine = object.get("cuisine").id;
                 
                
                 var country = object.get("address").get("country");
@@ -283,6 +288,7 @@ Restaurant.loadRestaurants = function () {
                 items += '<li class="list-group-item"  data-description="' + description +'"'
                     + ' data-id=' + id + ' data-note="' + note + '"'
                     + ' data-zipcode="' + zipcode +'"'
+                    + ' data-cuisine="' + cuisine +'"'
                     + ' data-country="' + country + '"' + ' data-state="' + state + '"'
                     + ' data-city="' + city + '"' + ' data-contactName="' + contactName + '"'
                     + ' data-phone="' + phone + '"' + ' data-email="' + email + '"'
@@ -386,6 +392,8 @@ Restaurant.selectRestaurant = function(e){
          $("#description").val($(this).attr("data-description"));
          $("#note").focus();
          $("#note").val($(this).attr("data-note"));
+         $("#cuisine").focus();
+         $("#cuisine").val($(this).attr("data-cuisine"));
 
 
          
@@ -436,10 +444,10 @@ Restaurant.clickDeleteRestaurantIcon = function(){
 	}
 }
 Restaurant.deleteSelectedItem = function(){
-    var Restaurant1 = Parse.Object.extend("Restaurant");
-    var restaurant = new Restaurant1();
-    restaurant.set('id', Restaurant.getSelectedItem());
-    restaurant.destroy(null).then(
+    var RestaurantBiz = Parse.Object.extend("RestaurantBiz");
+    var restaurantBiz = new RestaurantBiz();
+    restaurantBiz.set('id', Restaurant.getSelectedItem());
+    restaurantBiz.destroy(null).then(
         function (res) {
             console.log("saved");                    
             $('.empty').show();
