@@ -162,7 +162,7 @@ Restaurant.init = function () {
             var note = $("#note").val();
             var cuisine = $("#cuisine").val();
             var restaurantActive = $("#restaurantActive").is(':checked');
-            
+            restaurant.set('active', restaurantActive);
             restaurant.set('name', name);
             restaurant.set('description', description);
             restaurant.set('note', note);
@@ -272,6 +272,7 @@ Restaurant.loadRestaurants = function () {
                 if(object.get("cuisine"))
                 cuisine = object.get("cuisine").id;
                 
+                var active = object.get("active");
                
                 var country = object.get("address").get("country");
                 var state = object.get("address").get("state");   
@@ -289,6 +290,7 @@ Restaurant.loadRestaurants = function () {
                     + ' data-id=' + id + ' data-note="' + note + '"'
                     + ' data-zipcode="' + zipcode +'"'
                     + ' data-cuisine="' + cuisine +'"'
+                    + ' data-active="' + active +'"'
                     + ' data-country="' + country + '"' + ' data-state="' + state + '"'
                     + ' data-city="' + city + '"' + ' data-contactName="' + contactName + '"'
                     + ' data-phone="' + phone + '"' + ' data-email="' + email + '"'
@@ -395,6 +397,14 @@ Restaurant.selectRestaurant = function(e){
          $("#cuisine").focus();
          $("#cuisine").val($(this).attr("data-cuisine"));
 
+         var activeCheckBox = $('#retaurantActive');
+         var restaurantStatus = $(this).attr("data-active");         
+         var isTrueSet = (restaurantStatus === 'true');        
+         if(isTrueSet){
+            activeCheckBox.prop('checked', true);
+         }else{
+            activeCheckBox.prop('checked', false);
+         }
 
          
         
