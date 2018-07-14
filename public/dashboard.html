@@ -452,8 +452,289 @@
           </ul>
         </div>
       </div>
-      <div class="col-sm-6 form"></div>
-      <div class="col-sm-3 form"></div>
+      <div class="col-sm-9 form" style="background: #304150;;min-height: 200px;">
+
+        <div class="row">
+          <div class="col-12 col-sm-12" style="background:#354655;min-height: 120px;">
+            <div class="panel-heading">MENU BASIC INFO</div>
+
+            <div class="row">
+
+              <div class="col-4 col-sm-4">
+                <form>
+                  <div class="form-group">
+                    <label for="name">Menu Name</label>
+                    <input type="text" name="menuName" id="menuName" class="create-menuName" autocomplete="off">
+                    <span class="error"></span>
+                  </div>
+                </form>
+              </div>
+              <div class="col-4 col-sm-4">
+                <form>
+                  <div class="form-group">
+                    <label for="name">Description</label>
+                    <input type="text" name="menuDes" id="menuDes" class="create-menuDes" autocomplete="off">
+                    <span class="error"></span>
+                  </div>
+                </form>
+              </div>
+              <div class="col-4 col-sm-4">
+                <form>
+                  <div class="form-group">
+                    <label for="name">Note</label>
+                    <input type="text" name="menuDes" id="menuDes" class="create-menuDes" autocomplete="off">
+                    <span class="error"></span>
+                  </div>
+                </form>
+              </div>
+
+
+            </div>
+
+
+
+
+
+
+
+
+          </div>
+
+        </div>
+        <div class="row">
+          <div class="col-10 col-sm-4" style="background:#304150;min-height: 600px">
+            <div class="panel-heading">MENU ITEMS
+              <a id="addMenuItemIcon" href="#" class="pull-right add-edit-app">
+                <i class="fa fa-plus-square fa-lg"></i>
+              </a>
+              <p>
+                <br/>
+              </p>
+              <div> STARTERS
+                <ul class="list-group" id="menuItemList">
+
+
+                </ul>
+              </div>
+              <div> MAIN
+                <ul class="list-group" id="menuItemList2">
+
+
+                </ul>
+              </div>
+
+            </div>
+          </div>
+          <div class="col-2 col-sm-8" style="background:#465f75;min-height: 600px">
+            <div class="row">
+              <div class="col-12 col-sm-12" style="background:#465f75;min-height: 120px;">
+                <div class="panel-heading">MENU ITEM BASIC INFO</div>
+
+                <div class="row">
+
+                  <div class="col-4 col-sm-4">
+                    <form>
+                      <div class="form-group">
+                        <label for="name">Menu Item Name</label>
+                        <input type="text" name="menuItemName" id="menuItemName" class="create-menuItemName" autocomplete="off">
+                        <span class="error"></span>
+                      </div>
+                    </form>
+                  </div>
+                  <div class="col-4 col-sm-4">
+                    <form>
+                      <div class="form-group">
+                        <label for="name">Description</label>
+                        <input type="text" name="menuItemDes" id="menuItemDes" class="create-menuItemDes" autocomplete="off">
+                        <span class="error"></span>
+                      </div>
+                    </form>
+                  </div>
+                  <div class="col-4 col-sm-4">
+                    <form>
+                      <div class="form-group">
+                        <label for="name">Note</label>
+                        <input type="text" name="menuItemNote" id="menuItemNote" class="create-menuItemNote" autocomplete="off">
+                        <span class="error"></span>
+                      </div>
+                    </form>
+                  </div>
+
+
+                </div>
+
+
+
+
+
+
+
+
+              </div>
+              <div class="col-12 col-sm-12" style="background:#465f75;min-height: 120px;">
+                <div class="panel-heading">MENU ITEM CATEGORY</div>
+
+                <div class="row">
+                  <div class="col-6 col-sm-4">
+                    <form>
+                      <div class="form-group">
+                        <label for="menuItemCategory" ></label>
+                        <select class="form-control" id="menuItemCategory" name="menuItemCategory">
+                          <option value="1" >Select</option>
+                          <option value="2" >Food</option>
+                          <option value="3" >Beverage</option>
+                         
+                                                   
+
+                        </select>
+                        <span class="error"></span>
+                      </div>
+                    </form>
+                  </div>
+
+                </div>
+
+                
+
+
+              </div>
+
+              <div class="col-12 col-sm-12" style="background:#465f75;min-height: 120px;">
+                <div class="panel-heading">MENU ITEM GROUP</div>
+
+                <div class="row">
+                  <div class="col-6 col-sm-4">
+                    <form>
+                      <div class="form-group">
+                        <label for="menuItemGroup" ></label>
+                        <select class="form-control" id="menuItemGroup" name="menuItemGroup">
+                          <option value="KRgsNtXl0O" >Select</option>
+                          <option value="nGhOlA5xNH" >Starters</option>
+                         
+
+                        </select>
+                        <span class="error"></span>
+                      </div>
+                    </form>
+                  </div>
+
+                </div>
+                
+
+
+
+              </div>
+
+
+              <div class="col-12 col-sm-12" style="background:#465f75;min-height: 50px;">
+                <div class="panel-heading">MENU ITEM ATTRIBUTES</div>
+              </div>
+              <div class="col-12 col-sm-12" style="background:#465f75;min-height: 60px;">
+                <div class="row">
+
+                  <div class="col-6 col-sm-4">
+                    <form>
+                      <div class="form-group">
+                        <label for="name" class="menu-item-lbl">Calori Range</label>
+                        <span class="error"></span>
+                      </div>
+                    </form>
+                  </div>
+                  <div class="col-4 col-sm-4">
+                    <form>
+                      <div class="form-group">
+                        <label for="name"></label>
+                        <input type="text" name="menuItemDes" id="menuItemDes" class="create-menuItemDes" autocomplete="off">
+                        <span class="error"></span>
+                      </div>
+                    </form>
+                  </div>
+                  <div class="col-2 col-sm-4">
+                  </div>
+
+                </div>
+              </div>
+
+              <div class="col-12 col-sm-12" style="background:#465f75;min-height: 60px;">
+                <div class="row">
+
+                  <div class="col-6 col-sm-4">
+                    <form>
+                      <div class="form-group">
+                        <label for="name" class="menu-item-lbl">Gluten</label>
+                        <span class="error"></span>
+                      </div>
+                    </form>
+                  </div>
+                  <div class="col-4 col-sm-4">
+                    <form>
+                      <div class="form-group">
+                        <label for="name"></label>
+                        <input type="text" name="menuItemDes" id="menuItemDes" class="create-menuItemDes" autocomplete="off">
+                        <span class="error"></span>
+                      </div>
+                    </form>
+                  </div>
+                  <div class="col-2 col-sm-4">
+                  </div>
+
+                </div>
+              </div>
+
+              <div class="col-12 col-sm-12" style="background:#465f75;min-height: 60px;">
+                <div class="row">
+
+                  <div class="col-6 col-sm-4">
+                    <form>
+                      <div class="form-group">
+                        <label for="name" class="menu-item-lbl">Allergy Information</label>
+                        <span class="error"></span>
+                      </div>
+                    </form>
+                  </div>
+                  <div class="col-4 col-sm-4">
+                    <form>
+                      <div class="form-group">
+                        <label for="name"></label>
+                        <input type="text" name="menuItemDes" id="menuItemDes" class="create-menuItemDes" autocomplete="off">
+                        <span class="error"></span>
+                      </div>
+                    </form>
+                  </div>
+                  <div class="col-2 col-sm-4">
+                  </div>
+
+                </div>
+              </div>
+
+
+
+              <div class="col-12 col-sm-12" style="background:#465f75;min-height: 100px">
+                <form class="basic-form">
+                  <div class="CTA">
+                    <input type="submit" value="ADD MENU ITEM" id="createRestaurantButton">
+
+                  </div>
+                </form>
+              </div>
+
+
+
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-sm-12" style="background:#304150;min-height: 150px">
+            <form class="basic-form">
+              <div class="CTA">
+                <input type="submit" value="CREATE MENU" id="createRestaurantButton">
+
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
     </div>
 
   </section>
