@@ -48,4 +48,37 @@ Menu.init = function () {
 
 
     enableListItemClick();
+
+    $('input').blur(function () {
+
+        if ($(this).hasClass('create-menuName')) {
+            if ($(this).val().length == '') {
+                $(this).siblings('span.error').text('Please type menu name').fadeIn().parent('.form-group').addClass('hasError');
+                
+            } else {
+                $(this).siblings('.error').text('').fadeOut().parent('.form-group').removeClass('hasError');
+                
+            }
+        }
+
+        if ($(this).hasClass('create-menuDes')) {
+            if ($(this).val().length == '') {
+                $(this).siblings('span.error').text('Please type description').fadeIn().parent('.form-group').addClass('hasError');
+                
+            } else {
+                $(this).siblings('.error').text('').fadeOut().parent('.form-group').removeClass('hasError');
+                
+            }
+        }
+
+        if ($(this).hasClass('create-menuNote')) {
+            if ($(this).val().length == '') {
+                $(this).siblings('span.error').text('Please type note').fadeIn().parent('.form-group').addClass('hasError');
+                
+            } else {
+                $(this).siblings('.error').text('').fadeOut().parent('.form-group').removeClass('hasError');
+                
+            }
+        }
+    });
 }
