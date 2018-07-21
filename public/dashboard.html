@@ -8,9 +8,9 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.css">
   <link rel="stylesheet" href="/public/assets/css/nprogress.css">
-
   <link rel="stylesheet" href="/public/assets/css/dashboard.css">
-
+  <link rel="stylesheet" href="/public/assets/css/menu.css">
+  <link rel="stylesheet" href="/public/assets/css/jquery.multiselect.css">
 
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700|Raleway:300,600" rel="stylesheet">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
@@ -30,7 +30,7 @@
   <script src="/public/assets/js/menu.js"> </script>
   <script src="/public/assets/js/countries.js"> </script>
   <script src="/public/assets/js/config.js"> </script>
-
+  <script src="/public/assets/js/jquery.multiselect.js"> </script>
 
 
   <!------ Include the above in your HEAD tag ---------->
@@ -571,18 +571,19 @@
 
 
               </div>
+
+
+
+              <!--Menu Item Group  -->
               <div class="col-12 col-sm-12" style="background:#465f75;min-height: 120px;">
-                <div class="panel-heading">MENU ITEM CATEGORY</div>
+                <div class="panel-heading">MENU ITEM GROUP</div>
 
                 <div class="row">
-                  <div class="col-6 col-sm-4">
+                  <div class="col-3 col-sm-3">
                     <form>
                       <div class="form-group">
-                        <label for="menuItemCategory" ></label>
-                        <select class="form-control" id="menuItemCategory" name="menuItemCategory">
-                          <option value="1" >Select</option>
-                          <option value="2" >Food</option>
-                          <option value="3" >Beverage</option>
+                        <label for="menuItemGroup"></label>
+                        <select class="form-control" id="menuItemGroup" name="menuItemGroup">
                          
                                                    
 
@@ -591,51 +592,145 @@
                       </div>
                     </form>
                   </div>
+                  <div class="col-4 col-sm-4">
+                    <div>
+
+                      <a id="addNewMenuItemGroup" href="#" class="pull-left add-edit-app">
+                        <i class="fa fa-plus-square fa-lg"></i>
+                      </a>
+
+                    </div>
+                    <div id="newMenuItemGroupEnterDiv">
+                      <form>
+                        <div class="pull-left">
+                          <label for="newMenuItemGroupName">Group Name</label>
+                          <input type="text" name="newMenuItemGroupName" id="newMenuItemGroupName" class="create-newMenuItemGroupName" autocomplete="off">
+                          <span class="error"></span>
+                        </div>
+
+                        <div class="CTA">
+                          <input type="submit" value="ADD GROUP" id="createNewMenuItemGroupButton">
+
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                  <div class="col-3 col-sm-3">
+                    <form class="left-align">
+
+                    </form>
+                  </div>
+                  <div class="col-2 col-sm-2">
 
                 </div>
 
+                </div>
                 
 
 
               </div>
+              <!--End Menu Item Group  -->
+
 
               <div class="col-12 col-sm-12" style="background:#465f75;min-height: 120px;">
-                <div class="panel-heading">MENU ITEM GROUP</div>
+                <div class="panel-heading">MENU ITEM CATEGORY</div>
 
                 <div class="row">
-                  <div class="col-6 col-sm-4">
+
+                  <div class="col-3 col-sm-3">
+
                     <form>
                       <div class="form-group">
-                        <label for="menuItemGroup" ></label>
-                        <select class="form-control" id="menuItemGroup" name="menuItemGroup">
-                          <option value="KRgsNtXl0O" >Select</option>
-                          <option value="nGhOlA5xNH" >Starters</option>
+                        <div class="pulldown-caption">Category Level 1</div>
+                        <label for="menuItemCategory" class=""></label>
+                        <select class="form-control" id="menuItemCategory" name="menuItemCategory">
+                          <option value="1">Select</option>
+                          <option value="2">Food</option>
+                          <option value="3">Beverage</option>
                          
 
                         </select>
                         <span class="error"></span>
                       </div>
                     </form>
-                  </div>
 
                 </div>
+                  <div class="col-3 col-sm-3">
                 
+                    <form>
+                      <div class="form-group">
+                        <div class="pulldown-caption">Category Level 2</div>
+                        <label for="menuItemCategory2"></label>
+                        <select class="form-control" id="menuItemCategory2" name="menuItemCategor2">
+                          <option value="1">Select</option>
+                          <option value="2">Food</option>
+                          <option value="3">Beverage</option>
 
 
+                        </select>
+                        <span class="error"></span>
+              </div>
+                    </form>
 
               </div>
+
+                  <div class="col-3 col-sm-3">
+                    <form>
+                      <div class="form-group">
+                        <div class="pulldown-caption">Category Level 3</div>
+                        <label for="menuItemCategory3"></label>
+                        <select class="form-control" id="menuItemCategory3" name="menuItemCategor3">
+                          <option value="1">Select</option>
+                          <option value="2">Food</option>
+                          <option value="3">Beverage</option>
+
+
+                        </select>
+                        <span class="error"></span>
+                      </div>
+                    </form>
+
+                  </div>
+                  <div class="col-3 col-sm-3">
+                    <form>
+                      <div class="form-group">
+                        <div class="pulldown-caption">Category Level 4</div>
+                        <label for="menuItemCategory4"></label>
+                        <select class="form-control" id="menuItemCategory4" name="menuItemCategor4">
+                          <option value="1">Select</option>
+                          <option value="2">Food</option>
+                          <option value="3">Beverage</option>
+
+
+                        </select>
+                        <span class="error"></span>
+                      </div>
+                    </form>
+
+                  </div>
+
+                  </div>
+
+
+
+
+                </div>
+
+
 
 
               <div class="col-12 col-sm-12" style="background:#465f75;min-height: 50px;">
                 <div class="panel-heading">MENU ITEM ATTRIBUTES</div>
               </div>
+
+              <div id="fixedMenuItemCategoryDiv">
               <div class="col-12 col-sm-12" style="background:#465f75;min-height: 60px;">
                 <div class="row">
 
                   <div class="col-6 col-sm-4">
                     <form>
                       <div class="form-group">
-                        <label for="name" class="menu-item-lbl">Calori Range</label>
+                          <label for="name" class="menu-item-lbl">Calori Range</label>
                         <span class="error"></span>
                       </div>
                     </form>
@@ -644,8 +739,13 @@
                     <form>
                       <div class="form-group">
                         <label for="name"></label>
-                        <input type="text" name="menuItemDes" id="menuItemDes" class="create-menuItemDes" autocomplete="off">
-                        <span class="error"></span>
+                          <select class="form-control" id="menuItemCategory5" name="menuItemCategor5">
+                            <option value="1">Select</option>
+                            <option value="2">Food</option>
+                            <option value="3">Beverage</option>
+
+
+                          </select>
                       </div>
                     </form>
                   </div>
@@ -661,52 +761,32 @@
                   <div class="col-6 col-sm-4">
                     <form>
                       <div class="form-group">
-                        <label for="name" class="menu-item-lbl">Gluten</label>
+                          <label for="name" class="menu-item-lbl">Days Available</label>
                         <span class="error"></span>
                       </div>
                     </form>
                   </div>
                   <div class="col-4 col-sm-4">
-                    <form>
+
                       <div class="form-group">
                         <label for="name"></label>
-                        <input type="text" name="menuItemDes" id="menuItemDes" class="create-menuItemDes" autocomplete="off">
-                        <span class="error"></span>
+                        <select id="people" name="people" multiple>
+                          <option value="alice">Sunday</option>
+                          <option value="bob">Monday</option>
+                          <option value="carol">Tuesday</option>
+                          <option value="carol">Wednesday</option>
+                          <option value="carol">Thursday</option>
+                          <option value="carol">Friday</option>
+                        </select>
                       </div>
-                    </form>
+
                   </div>
                   <div class="col-2 col-sm-4">
                   </div>
 
                 </div>
               </div>
-
-              <div class="col-12 col-sm-12" style="background:#465f75;min-height: 60px;">
-                <div class="row">
-
-                  <div class="col-6 col-sm-4">
-                    <form>
-                      <div class="form-group">
-                        <label for="name" class="menu-item-lbl">Allergy Information</label>
-                        <span class="error"></span>
-                      </div>
-                    </form>
-                  </div>
-                  <div class="col-4 col-sm-4">
-                    <form>
-                      <div class="form-group">
-                        <label for="name"></label>
-                        <input type="text" name="menuItemDes" id="menuItemDes" class="create-menuItemDes" autocomplete="off">
-                        <span class="error"></span>
-                      </div>
-                    </form>
-                  </div>
-                  <div class="col-2 col-sm-4">
-                  </div>
-
-                </div>
               </div>
-
 
 
               <div class="col-12 col-sm-12" style="background:#465f75;min-height: 100px">

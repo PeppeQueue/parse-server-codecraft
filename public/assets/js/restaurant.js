@@ -160,7 +160,6 @@ Restaurant.init = function () {
         event.preventDefault();
 
 
-
         if (nameError == true || descriptionError == true || addressLine1Error == true || countryError == true || stateError == true
         || contactNameError == true|| cityError == true || zipCodeError == true ||  contactPhoneError ==  true) {
             $('.create-name, .create-description, .create-contact, .create-country,.create-state,.create-addressline1,.label-icon,.create-zipcode,.create-city,.create-contactName,.create-contactPhone').blur();

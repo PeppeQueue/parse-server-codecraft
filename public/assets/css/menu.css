@@ -1,0 +1,20 @@
+.pulldown-caption {
+    font-size: 12px;
+    font-weight: 400;
+    text-transform: uppercase; 
+    font-family: "Montserrat", sans-serif;
+    transform: translateY(50px);
+    transition: all 0.4s;
+    cursor: text;
+     z-index: -1; 
+    margin-bottom: 13px;
+}
+
+.form-group select{
+    margin-top: 25px;
+    min-width:150px;
+}
+
+.form form left-align{
+  left:0% !important;
+}

@@ -147,7 +147,7 @@ a.logo span {
 }
 .form .form-peice {
   background: #304150;
-  min-height: 520px;
+  min-height: 580px;
   margin-top: 0px;
   box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);  
   padding: 30px 0 60px;
@@ -176,13 +176,13 @@ a.logo span {
 .form .address-form {  
   left: 52%;  
   width: 25%;
-  margin-top: -55px;
+  margin-top: -70px;
 }
 
 .form .contact-form {  
   left: 85%;  
   width: 25%;
-  margin-top: -125px;
+  margin-top: -160px;
 }
 
 
