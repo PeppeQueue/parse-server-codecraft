@@ -208,7 +208,7 @@ a.logo span {
   transition: all 0.4s;
   cursor: text;
   z-index: -1;
-  margin-bottom: 13px;
+  margin-bottom: 10px;
 }
 .form form label.active {
   transform: translateY(13px);

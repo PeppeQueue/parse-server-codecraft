@@ -35,7 +35,7 @@
 .multi-select-menuitem input {
     position: absolute;
     margin-top: 0.25em;
-    margin-left: -20px;
+    margin-left: 100px !important;
 }
 
 .multi-select-button {
