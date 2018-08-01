@@ -243,13 +243,13 @@ Login.init = function() {
     $('form.login-form').submit(function (event) {
         
         event.preventDefault();
-
-        if (signInEmailError == true || signInPasswordError == true ) {
+        var email = $("#signInEmail").val();
+        var password = $("#signInPassword").val();
+        if (email == "" || password == "" ) {
             $('.signin-email, .signin-pass').blur();
         } else {
 
-              var email = $("#signInEmail").val();
-              var password = $("#signInPassword").val();  
+                
   
 
              $("#loader").css("display","block");
