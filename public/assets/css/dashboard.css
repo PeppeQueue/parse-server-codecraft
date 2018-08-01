@@ -24,9 +24,7 @@ h1 {
   font-weight: 700;
 }
 
-section#formHolder {
-  /*padding: 100px 0;*/
-}
+
 
 .brand {
   padding: 0px;  
@@ -148,7 +146,7 @@ a.logo span {
 .form .form-peice {
   background: #304150;
   min-height: 580px;
-  margin-top: 0px;
+  margin-top: 30px;
   box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);  
   padding: 30px 0 60px;
   transition: all 0.9s cubic-bezier(1, -0.375, 0.285, 0.995);
@@ -560,7 +558,6 @@ input:-webkit-autofill {
 }
 
 .menus {
-  overflow: hidden;
   *zoom: 1;
 }
 

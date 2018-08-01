@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="/public/assets/css/nprogress.css">
   <link rel="stylesheet" href="/public/assets/css/dashboard.css">
   <link rel="stylesheet" href="/public/assets/css/menu.css">
+  <link rel="stylesheet" href="/public/assets/css/restaurant.css">
   <link rel="stylesheet" href="/public/assets/css/jquery.multiselect.css">
 
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700|Raleway:300,600" rel="stylesheet">
@@ -23,6 +24,8 @@
   <!-- Latest compiled JavaScript -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="https://npmcdn.com/parse/dist/parse.min.js"> </script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
   <script src="/public/assets/js/nprogress.js"> </script>
   <script src="/public/assets/js/common.js"> </script>
   <script src="/public/assets/js/dashboard.js"> </script>
@@ -32,6 +35,9 @@
   <script src="/public/assets/js/config.js"> </script>
   <script src="/public/assets/js/jquery.multiselect.js"> </script>
 
+  <script src="/public/assets/js/util.js"> </script>
+  <script src="/public/assets/js/menuitem.js"> </script>
+
 
   <!------ Include the above in your HEAD tag ---------->
   <script type="text/javascript">
@@ -40,7 +46,7 @@
      
       Dashboard.init();
       Restaurant.init();
-      Menu.init();
+
 
 
     });
@@ -118,20 +124,20 @@
         <div class="collapse navbar-collapse" id="mainMenu">
           <ul class="nav navbar-nav navbar-ul">
             <li name="Restaurant" id="restaurant" class="active-list">
-              <a href="#">
+              <a href="">
                 <i class="fas fa-home fa-2x"></i>
                 <span class="menu-text">RESTAURANTS</span>
               </a>
             </li>
-            <li name="Menu" id="menu">
-              <a href="#">
-                <i class="fas fa-book fa-2x"></i>
-                <span class="menu-text">MENU</span>
-              </a>
-            </li>
-            <li name="Orders" id="orders">
+            <!--   <li name="Menu" id="menu">
               <a href="#">
                 <i class="fas fa-utensils fa-2x"></i>
+                <span class="menu-text">MENU</span>
+              </a>
+            </li> -->
+            <li name="Orders" id="orders">
+              <a href="#">
+                <i class="fas fa-book fa-2x"></i>
                 <span class="menu-text">ORDERS</span>
               </a>
             </li>
@@ -166,27 +172,23 @@
   <div class="container main" id="restaurant-container">
     <section id="formHolder">
 
-      <div class="row brand">
+      <div class="row brand" id="restaurantView">
+        <div>
         <div class="col-sm-3 form">
+          </div>
+
+          <div class="col-sm-6 form">
           <div class="menus" id="restaurants">
-            <div class="panel panel-default">
-              <div class="panel-heading">
+              <div class="panel panel-restaurant">
+                <div class="panel-heading-restaurant">
                 RESTAURANTS
-                <a id="addRestaurantIcon" href="#" class="pull-right add-edit-app">
+                  <a id="addRestaurantIcon" href="" class="pull-right add-edit-app">
                   <i class="fa fa-plus-square fa-lg"></i>
                 </a>
               </div>
               <div class="panel-body">
 
-                <div class="action-items">
-                  <a href="#" rel="tooltip" title="Search">
-                    <i class="fa fa-search fa-lg"></i>
-                  </a>
-                  <a href="#" id="deleteRestaurantButton" rel="tooltip" title="Delete">
-                    <i class="fa fa-times fa-lg"></i>
-                  </a>
 
-                </div>
                 <div class="search-panel" style="display: none;">
                   <input type="email" class="form-control" id="searchRestaurant" placeholder="Search">
                 </div>
@@ -202,15 +204,29 @@
 
         </div>
 
+          <div class="col-sm-3 form">
+          </div>
+        </div>
+      </div>
 
         <!-- Form Box -->
-        <div class="col-sm-9 form" id="createDiv">
+      <div class="row brand" id="restaurantCreateView">
+        <div>
+          <div class="col-sm-2 form"></div>
+          <div class="col-sm-9 form">
+              <div>
+                  <a href="">
+                    <span class="backButton" id="restaurantCreateViewBackButton">
+                      <i class="fas fa-caret-left"></i>BACK</span>
+                  </a>
+                </div>
           <div id="emptyRestaurant" class="empty">
             SELECT RESTAURANT TO VIEW INFORMATION
             <span> OR CREATE NEW</span>
             <i class="fas fa-hand-point-left fa-3x animated infinite bounce "></i>
           </div>
           <!-- Login Form -->
+
           <div class="create form-peice" style="display: none">
             <div class="col-sm">
             <form class="basic-form" action="#" method="post" id="createForm">
@@ -289,6 +305,8 @@
               <div class="CTA edit-button">                 
                   <input type="submit" value="SAVE" id="editRestaurantButton">
                 </div>
+
+
 
 
 
@@ -402,15 +420,17 @@
           </div>
           <!-- End Login Form -->
         </div>
-
+          <div class="col-sm-1 form"></div>
+        </div>
 
 
 
 
       </div>
+    </section>
   </div>
 
-  </section>
+
 
 </div>
 
@@ -418,30 +438,26 @@
 <div class="container main" id="menu-container">
   <section id="formHolder">
 
-    <div class="row brand">
-      <div class="col-sm-3 form">
-        <div class="menus" id="users">
+    <div class="row brand" id="menuView">
+      <div class="col-sm-3 form"></div>
+      <div class="col-sm-6 form">
+        <div class="menus" id="menus">
+          <div>
+            <a href="">
+              <span class="menuBackButton">
+                <i class="fas fa-caret-left"></i>BACK</span>
+            </a>
+          </div>
           <div class="panel panel-default">
-            <div class="panel-heading">
-              MENUS
-              <a id="addUserIcon" href="#" class="pull-right add-edit-app">
+            <div class="panel-heading-restaurant">
+
+
+              <span id="selectedRestaurantName"></span> - MENUS
+              <a id="addMenuIcon" href="" class="pull-right add-edit-app">
                 <i class="fa fa-plus-square fa-lg"></i>
               </a>
             </div>
             <div class="panel-body">
-
-              <div class="action-items">
-                <a href="#" rel="tooltip" title="Search">
-                  <i class="fa fa-search fa-lg"></i>
-                </a>
-                <a href="#" id="deleteButton" rel="tooltip" title="Delete">
-                  <i class="fa fa-times fa-lg"></i>
-                </a>
-
-              </div>
-              <div class="search-panel" style="display: none;">
-                <input type="email" class="form-control" id="searchUser" placeholder="Search">
-              </div>
             </div>
             <ul class="list-group" id="menuList">
 
@@ -451,42 +467,66 @@
           <ul class="pagination pagination-sm pull-right" id="applications-pagination">
           </ul>
         </div>
+
       </div>
-      <div class="col-sm-9 form" style="background: #304150;;min-height: 200px;">
+      <div class="col-sm-3 form"></div>
+    </div>
+    <div class="row brand" id="menuCreateView">
+      <div class="col-sm-3 form"></div>
+      <div class="col-sm-6 form">
+          <div>
+              <a href="">
+                <span class="backButton" id="menuCreateViewBackButton">
+                  <i class="fas fa-caret-left"></i>BACK</span>
+              </a>
+      </div>
 
-        <div class="row">
-          <div class="col-12 col-sm-12" style="background:#354655;min-height: 120px;">
-            <div class="panel-heading">MENU BASIC INFO</div>
+        <div class="create menu-form-peice">
 
-            <div class="row">
+          <form class="menu-form">
+            <div class="panel-heading-menu">MENU </div>
+            <div class="panel-heading-menu-sub">RESTAURANT -
+              <span id="restaurantName"> </span>
+            </div>
+            <p>
+              <br/>
+            </p>
 
-              <div class="col-4 col-sm-4">
-                <form>
+
                   <div class="form-group">
                     <label for="menuName">Menu Name</label>
                     <input type="text" name="menuName" id="menuName" class="create-menuName" autocomplete="off">
+              <input type="hidden" name="menuId" id="menuId">
                     <span class="error"></span>
                   </div>
-                </form>
-              </div>
-              <div class="col-4 col-sm-4">
-                <form>
                   <div class="form-group">
                     <label for="menuDes">Description</label>
                     <input type="text" name="menuDes" id="menuDes" class="create-menuDes" autocomplete="off">
                     <span class="error"></span>
                   </div>
-                </form>
-              </div>
-              <div class="col-4 col-sm-4">
-                <form>
                   <div class="form-group">
                     <label for="menuNote">Note</label>
                     <input type="text" name="menuNote" id="menuNote" class="create-menuNote" autocomplete="off">
                     <span class="error"></span>
                   </div>
-                </form>
+            <div class="form-group">
+              <p>
+                <br/> </p>
+            </div>
+            <div class="form-group">
+              <div class="CTA">
+                <input type="submit" value="CREATE MENU" id="createMenuButton">
+                <input type="submit" value="SAVE MENU" id="editMenuButton">
+
               </div>
+            </div>
+
+
+
+                </form>
+
+
+
 
 
             </div>
@@ -496,36 +536,62 @@
 
 
 
+      </div>
 
 
+
+      <div class="col-sm-3 form"></div>
           </div>
 
+    <div class="row brand" id="menuItemView">
+      <div class="col-sm-3 form"></div>
+      <div class="col-sm-6 form">
+        <div class="menus" id="menuitems">
+          <div>
+            <a href="">
+              <span class="menuItemBackButton">
+                <i class="fas fa-caret-left"></i>BACK</span>
+            </a>
         </div>
-        <div class="row">
-          <div class="col-10 col-sm-4" style="background:#304150;min-height: 600px">
-            <div class="panel-heading">MENU ITEMS
-              <a id="addMenuItemIcon" href="#" class="pull-right add-edit-app">
+          <div class="panel panel-menu">
+            <div class="panel-heading-menu-sub">
+              <span id="menuItemsRestaurant"></span> -
+              <span id="menuItemsRestaurantMenu"></span>
+              <br/> MENU ITEMS
+              <a id="addMenuItemIcon" href="" class="pull-right add-edit-app">
                 <i class="fa fa-plus-square fa-lg"></i>
               </a>
-              <p>
-                <br/>
-              </p>
-              <div> STARTERS
+            </div>
+            <div class="panel-body">
+            </div>
                 <ul class="list-group" id="menuItemList">
+            </ul>
 
 
-                </ul>
+          </div>
               </div>
 
+      </div>
+      <div class="col-sm-3 form"></div>
 
             </div>
+    <div class="row brand" id="menuItemCreateView">
+      <div class="col-sm-2 form">
           </div>
-          <div class="col-2 col-sm-8" style="background:#465f75;min-height: 600px">
+      <div class="col-sm-8 form">
+          <div>
+              <a href="">
+                <span class="backButton" id="menuItemViewBackButton">
+                  <i class="fas fa-caret-left"></i>BACK</span>
+              </a>
+            </div>
+        <div class="col-12 col-sm-12" style="background:#465f75;min-height: 600px">
+            
             <div class="row">
-
+            <div class="panel-heading-menu">MENU ITEM DETAILS</div>
               <!--Menu Item Group  -->
               <div class="col-12 col-sm-12" style="background:#465f75;min-height: 120px;">
-                <div class="panel-heading">MENU ITEM GROUP</div>
+              <div class="panel-heading-menuitem-sub">MENU ITEM GROUP</div>
 
                 <div class="row">
                   <div class="col-3 col-sm-3">
@@ -581,7 +647,7 @@
               <!--End Menu Item Group  -->
 
               <div class="col-12 col-sm-12" style="background:#465f75;min-height: 120px;">
-                <div class="panel-heading">MENU ITEM BASIC INFO</div>
+              <div class="panel-heading-menuitem-sub">MENU ITEM BASIC INFO</div>
 
                 <div class="row">
 
@@ -612,26 +678,12 @@
                       </div>
                     </form>
                   </div>
-
-
                 </div>
-
-
-
-
-
-
-
 
               </div>
 
-
-
-             
-
-
               <div class="col-12 col-sm-12" style="background:#465f75;min-height: 120px;">
-                <div class="panel-heading">MENU ITEM CATEGORY</div>
+              <div class="panel-heading-menuitem-sub">MENU ITEM CATEGORY</div>
 
                 <div class="row">
 
@@ -707,108 +759,44 @@
 
 
               <div class="col-12 col-sm-12" style="background:#465f75;min-height: 50px;">
-                <div class="panel-heading">MENU ITEM ATTRIBUTES</div>
+              <div class="panel-heading-menuitem-sub">MENU ITEM ATTRIBUTES</div>
               </div>
 
               <div id="fixedMenuItemCategoryDiv">
-                <!--
-              <div class="col-12 col-sm-12" style="background:#465f75;min-height: 60px;">
-                <div class="row">
 
-                  <div class="col-6 col-sm-4">
-                    <form>
-                      <div class="form-group">
-                          <label for="name" class="menu-item-lbl">Calori Range</label>
-                        <span class="error"></span>
+                      </div>
+
+
+            <div class="col-12 col-sm-12" style="background:#465f75;min-height: 100px">
+              <form class="basic-form">
+                <div class="CTA">
+                  <input type="submit" value="ADD MENU ITEM" id="createMenuItemButton">
+
                       </div>
                     </form>
                   </div>
-                  <div class="col-4 col-sm-4">
-                    <form>
-                      <div class="form-group">
-                        <label for="name"></label>
-                          <select class="form-control" id="menuItemCategory5" name="menuItemCategor5">
-                            <option value="1">Select</option>
-                            <option value="2">Food</option>
-                            <option value="3">Beverage</option>
 
 
-                          </select>
+
                       </div>
-                    </form>
                   </div>
-                  <div class="col-2 col-sm-4">
-                  </div>
-
-                </div>
-              </div>
-
-              <div class="col-12 col-sm-12" style="background:#465f75;min-height: 60px;">
-                <div class="row">
-
-                  <div class="col-6 col-sm-4">
-                    <form>
-                      <div class="form-group">
-                          <label for="name" class="menu-item-lbl">Days Available</label>
-                        <span class="error"></span>
-                      </div>
-                    </form>
-                  </div>
-                  <div class="col-4 col-sm-4">
-
-                      <div class="form-group">
-                        <label for="name"></label>
-                        <select id="people" name="people" multiple>
-                          <option value="alice">Sunday</option>
-                          <option value="bob">Monday</option>
-                          <option value="carol">Tuesday</option>
-                          <option value="carol">Wednesday</option>
-                          <option value="carol">Thursday</option>
-                          <option value="carol">Friday</option>
-                        </select>
-                      </div>
-
-                  </div>
-                  <div class="col-2 col-sm-4">
-                  </div>
-
-                </div>
-              </div>
-             -->
-              </div>
-
-
-              <div class="col-12 col-sm-12" style="background:#465f75;min-height: 100px">
-                <form class="basic-form">
-                  <div class="CTA">
-                    <input type="submit" value="ADD MENU ITEM" id="createMenuItemButton">
-
-                  </div>
-                </form>
-              </div>
-
-
-
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-12 col-sm-12" style="background:#304150;min-height: 150px">
-            <form class="basic-form">
-              <div class="CTA">
-                <input type="submit" value="CREATE MENU" id="createMenuButton">
-
-              </div>
-            </form>
-          </div>
-        </div>
       </div>
 
-    </div>
+      <div class="col-sm-2 form">
+                      </div>
 
-  </section>
 
-</div>
+                </div>
+
+              </div>
+
+
+</section>
+        </div>
+
+
+
+
 
 <div class="container main" id="orders-container">
   <section id="formHolder">

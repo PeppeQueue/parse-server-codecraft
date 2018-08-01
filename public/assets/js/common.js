@@ -2,13 +2,17 @@ $(document).ready(function () {
 
     
 
-    $(".navbar-ul li").click(function () {
+    $(".navbar-ul li").click(function (event) {
+        event.preventDefault();
         $(".navbar-ul li").removeClass('active-list');
         $(this).addClass('active-list');
         $('.main').hide();
         var id = $(this).attr('id');
+        var name = $(this).attr('name');
         var container = id + "-container";
         $('#' + container).show();
+        var fn = window[name];
+        fn.init();
     
       });
 
