@@ -18,12 +18,15 @@ MenuItem.init = function (restaurant, menu) {
     $("#menuView").hide();
     $("#menuItemView").show();
 
+    $("#addMenuItemIcon").unbind('click');
     $('#addMenuItemIcon').click(MenuItem.clickAddMenuItemButton);
     MenuItem.registerInputEvents();
 
     //menu item group related functions
+    $("#addNewMenuItemGroup").unbind('click');
     $('#addNewMenuItemGroup').click(MenuItem.clickAddNewMenuItemGroup);
     MenuItem.registerMenuItemGroupInputEvents();
+    $("#createNewMenuItemGroupButton").unbind('click');
     $('#createNewMenuItemGroupButton').click(MenuItem.clickAddNewMenuItemGroupButton);
     MenuItem.loadMenuItemGroups();
 
@@ -35,12 +38,15 @@ MenuItem.init = function (restaurant, menu) {
     MenuItem.hideSubMenuCategoriesFromLevel(2);
 
     //menu item add button click
+    $("#createMenuItemButton").unbind('click');
     $('#createMenuItemButton').click(MenuItem.clickCreateMenuItemButton);
     $('#menuItemList').empty();
     $('#fixedMenuItemCategoryDiv').empty();
     MenuItem.loadMenuItems(menu);
 
+    $(".menuItemBackButton").unbind('click');
     $('.menuItemBackButton').click(MenuItem.goBackToMenuView);
+    $("#menuItemViewBackButton").unbind('click');
     $('#menuItemViewBackButton').click(MenuItem.goBackToMenuItemView);
     
 
