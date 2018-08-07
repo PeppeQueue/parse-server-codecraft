@@ -74,13 +74,18 @@ Menu.createNewMenu = function(event){
     
         NProgress.start();
         restaurantMenu.save(null).then(
-                function (res) {
+                function (resMenu) {
                     console.log("saved");                   
                     setTimeout(function () { NProgress.done(); }, 100);
                     Menu.loadMenu(Menu.restaurant.id);
                     $('#menuCreateView').hide();
                     $('#menuView').show();
-
+                    var RestaurantBiz = Parse.Object.extend("RestaurantBiz");
+                    var restaurantBiz = new RestaurantBiz();
+                    restaurantBiz.id = Menu.restaurant.id;
+                    var relation = restaurantBiz.relation("menus")
+                    relation.add(resMenu);
+                    restaurantBiz.save(null);
 
                 },
                 function (error) {
