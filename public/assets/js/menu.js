@@ -71,6 +71,7 @@ Menu.createNewMenu = function(event){
         restaurantMenu.set('description', description);
         restaurantMenu.set('note', note);
         restaurantMenu.set("restaurant", { "__type": "Pointer", "className": "RestaurantBiz", "objectId": Menu.restaurant.id });
+        restaurantMenu.set("owner", { "__type": "Pointer", "className": "_User", "objectId": Parse.User.current().id });
     
         NProgress.start();
         restaurantMenu.save(null).then(
