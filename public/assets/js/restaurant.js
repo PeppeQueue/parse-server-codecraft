@@ -12,23 +12,20 @@ Restaurant.init = function () {
 
     $('#editRestaurantButton').hide();
     $("#restaurantCreateView").hide();
-    
     $("#restaurantView").show();
-
 
     Parse.initialize(Config.PARSE_APP_ID);
     Parse.serverURL = Config.PARSE_SERVER_URL;
     var currentUser = Parse.User.current();
-    Restaurant.loadRestaurants();
-    Restaurant.loadCuisine();
-    Restaurant.loadServiceStyle();
-    Restaurant.loadAmbienceStyle();
+
+    RestaurantService.getRestaurantList();
+    RestaurantService.loadCuisine();
+    RestaurantService.loadServiceStyle();
+    RestaurantService.loadAmbienceStyle();
+    
     $('#addRestaurantIcon').click(Restaurant.clickAddRestaurantIcon);
     $('#deleteRestaurantButton').click(Restaurant.clickDeleteRestaurantIcon);
     $('#restaurantCreateViewBackButton').click(Restaurant.gotoRestaurantView);
-    
-    
-    
 
     populateCountries("country", "state");
 
@@ -254,7 +251,7 @@ Restaurant.init = function () {
                     $('.empty').show();
                     $('.form-peice').hide();
                     setTimeout(function () { NProgress.done(); }, 100);
-                    Restaurant.loadRestaurants();
+                    RestaurantService.getRestaurantList();
                     $('#restaurantCreateView').hide();
                     $('#restaurantView').show();
 
@@ -264,7 +261,7 @@ Restaurant.init = function () {
                     console.log("error");
                     $('.empty').show();
                     $('.form-peice').hide();
-                    Restaurant.loadRestaurants();
+                    RestaurantService.getRestaurantList();
                     $('#restaurantCreateView').hide();
                     $('#restaurantView').show();
                     setTimeout(function () { NProgress.done(); }, 100);
@@ -280,248 +277,146 @@ Restaurant.init = function () {
 
 
 }
-Restaurant.gotoRestaurantView = function(event){
+Restaurant.gotoRestaurantView = function (event) {
     event.preventDefault();
     $("#restaurantCreateView").hide();
     $("#restaurantView").show();
-    
+
 }
 
-Restaurant.loadRestaurants = function () {
+Restaurant.displayRestaurantList = function (results) {
 
-    var restaurantBiz = Parse.Object.extend("RestaurantBiz");
-    var query = new Parse.Query(restaurantBiz);
-    query.equalTo("owner", { "__type": "Pointer", "className": "_User", "objectId": Parse.User.current().id });
-    query.include("contact");
-    query.include("address");
-    NProgress.start();
     Restaurant.restaurants = [];
 
-    query.find().then(
-        function (results) {
-            var items = '';
-            for (var i = 0; i < results.length; i++) {
-                var object = results[i];
-                var id = object.id;
-                var name = object.get("name");
-                var description = object.get("description");
-                var note = object.get("note");
-                var cuisine = object.get("cuisine").id;
-                var ambienceStyle = object.get("ambienceStyle").id;
-                var serviceStyle = object.get("serviceStyle").id;
+    var items = '';
+    for (var i = 0; i < results.length; i++) {
+        var restaurant = results[i];
+        var id = restaurant.id;
+        var name = restaurant.get("name");
+        var description = restaurant.get("description");
+        var note = restaurant.get("note");
+        var cuisine = restaurant.get("cuisine").id;
+        var ambienceStyle = restaurant.get("ambienceStyle").id;
+        var serviceStyle = restaurant.get("serviceStyle").id;
 
-                var active = object.get("active");
+        var active = restaurant.get("active");
 
-                var country = object.get("address").get("country");
-                var state = object.get("address").get("state");
-                var zipcode = object.get("address").get("zipCode");
-                var city = object.get("address").get("city");
-                var address = object.get("address").get("address");
-                var addressId = object.get("address").id;
+        var country = restaurant.get("address").get("country");
+        var state = restaurant.get("address").get("state");
+        var zipcode = restaurant.get("address").get("zipCode");
+        var city = restaurant.get("address").get("city");
+        var address = restaurant.get("address").get("address");
+        var addressId = restaurant.get("address").id;
 
 
-                var contactId = object.get("contact").id;
-                var contactName = object.get("contact").get("name");
-                var phone = object.get("contact").get("phone");
-                var email = object.get("contact").get("email");
-
-                var restaurant = {};
-                restaurant.id = id;
-                restaurant.name = name;
-                restaurant.description = description;
-                restaurant.note = note;
-                restaurant.cuisineStyle = cuisine;
-                restaurant.ambienceStyle = ambienceStyle;
-                restaurant.serviceStyle = serviceStyle;
-                restaurant.active = active;
-
-                restaurant.country = country;
-                restaurant.state = state;
-                restaurant.zipcode = zipcode;
-                restaurant.city = city;
-                restaurant.address = address;
-                restaurant.addressId = addressId;
-
-                restaurant.contactId = contactId;
-                restaurant.contactName = contactName;
-                restaurant.phone = phone;
-                restaurant.email = email;
-
-                Restaurant.restaurants.push(restaurant);
-                var checked = "";
-                if(active){
-                    checked = "checked"
-                }else{
-                    checked = "";
-                }
+        var contactId = restaurant.get("contact").id;
+        var contactName = restaurant.get("contact").get("name");
+        var phone = restaurant.get("contact").get("phone");
+        var email = restaurant.get("contact").get("email");
 
 
-                items += '<li class="list-group-item"'
-                    + '"> <label class="switch pull-right"><input type="checkbox" class="restaurant-active" data-id=' + id + '   '+ checked +'>  <span class="slider round"></span> </label>'
-                    + '<div class="restaurantName">' + name + '</div>'
-                    + '<div>' + address + '</div>'
-                    + '<div>' + city + " " + state + " " + zipcode + " " + '</div>'
-                    + '<div>' + country + '</div>'
-                    + '<div> <p>' + " " + '</p></div>'
-                    + '<div>' + contactName + '</div>'
-                    + '<div>' + email + '</div>'
-                    + '<div>' + phone + '</div>'
-                    + '<div class="action-items-restaurant">'
-                    + '<a href="" rel="tooltip" title="Orders" data-id=' + id + '>'
-                    + '<i class="fas fa-book fa-lg" ></i>'
-                    + '</a><a href="" rel="tooltip" title="Menu" data-id=' + id + '>'
-                    + '<i class="fas fa-utensils fa-lg" ></i>'
-                    + '</a><a href="" rel="tooltip" title="Edit" data-id=' + id + '>'
-                    + '<i class="fas fa-edit fa-lg" ></i>'
-                    + '</a> <a href=""  rel="tooltip" title="Delete" data-id=' + id + '>'
-                    + '<i class="fa fa-trash fa-lg" ></i></a>'
-                    + '</div>'
-                    + '</li>';
-            }
-            $('#restaurantList').empty();
-            $('#restaurantList').append(items);
-
-            $('.restaurant-active').change(Restaurant.onChangeCheckBox); 
-            
-            $('#restaurants .action-items-restaurant a').click(Restaurant.selectOption);
-            setTimeout(function () { NProgress.done(); }, 100);
-
-
-        },
-        function (error) {
-            console.log("error");
-            setTimeout(function () { NProgress.done(); }, 100);
-
+        Restaurant.restaurants.push(restaurant);
+        var checked = "";
+        if (active) {
+            checked = "checked"
+        } else {
+            checked = "";
         }
-    );
+
+
+        items += '<li class="list-group-item"'
+            + '"> <label class="switch pull-right"><input type="checkbox" class="restaurant-active" data-id=' + id + '   ' + checked + '>  <span class="slider round"></span> </label>'
+            + '<div class="restaurantName">' + name + '</div>'
+            + '<div>' + address + '</div>'
+            + '<div>' + city + " " + state + " " + zipcode + " " + '</div>'
+            + '<div>' + country + '</div>'
+            + '<div> <p>' + " " + '</p></div>'
+            + '<div>' + contactName + '</div>'
+            + '<div>' + email + '</div>'
+            + '<div>' + phone + '</div>'
+            + '<div class="action-items-restaurant">'
+            + '<a href="" rel="tooltip" title="Orders" data-id=' + id + '>'
+            + '<i class="fas fa-book fa-lg" ></i>'
+            + '</a><a href="" rel="tooltip" title="Menu" data-id=' + id + '>'
+            + '<i class="fas fa-utensils fa-lg" ></i>'
+            + '</a><a href="" rel="tooltip" title="Edit" data-id=' + id + '>'
+            + '<i class="fas fa-edit fa-lg" ></i>'
+            + '</a> <a href=""  rel="tooltip" title="Delete" data-id=' + id + '>'
+            + '<i class="fa fa-trash fa-lg" ></i></a>'
+            + '</div>'
+            + '</li>';
+    }
+    $('#restaurantList').empty();
+    $('#restaurantList').append(items);
+    $('.restaurant-active').change(Restaurant.onChangeCheckBox);
+    $('#restaurants .action-items-restaurant a').click(Restaurant.selectOption);
+
+
 
 }
 
-Restaurant.onChangeCheckBox = function(){
+Restaurant.onChangeCheckBox = function () {
     var id = $(this).attr("data-id");
+    var restaurant = Restaurant.getSelectedRestaurant(id);
     if (!$(this).is(':checked')) {
-        Restaurant.updateRestaurantState(id, false);
-    }else{
-        Restaurant.updateRestaurantState(id, true);
+        RestaurantService.updateRestaurantState(restaurant, false);
+    } else {
+        RestaurantService.updateRestaurantState(restaurant, true);
     }
 }
 
-Restaurant.updateRestaurantState = function(restaurantId,active){
-    var RestaurantBiz = Parse.Object.extend("RestaurantBiz");
-    var restaurant = new RestaurantBiz();
-    restaurant.id = restaurantId;
-    restaurant.set("active",active);
-    restaurant.save(null);   
+
+Restaurant.displayCuisine = function (results) {
+    var items = '';
+    for (var i = 0; i < results.length; i++) {
+        var object = results[i];
+        var id = object.id;
+
+        var name = object.get("name");
+        var display = object.get("display");
+
+        items += '<option  value=' + id + ' data-name=' + name
+            + '>' + display + '</option>';
+
+    }
+    $('#cuisineStyle').empty();
+    $('#cuisineStyle').append(items);
+
 }
 
-Restaurant.loadCuisine = function () {
-    var cuisine = Parse.Object.extend("WorldCuisine");
-    var query = new Parse.Query(cuisine);
-    query.ascending("code");
-    NProgress.start();
+Restaurant.displayServiceStyle = function (results) {
+    var items = '';
+    for (var i = 0; i < results.length; i++) {
+        var object = results[i];
+        var id = object.id;
 
-    query.find().then(
-        function (results) {
+        var name = object.get("name");
+        var display = object.get("display");
 
-            var items = '';
-            for (var i = 0; i < results.length; i++) {
-                var object = results[i];
-                var id = object.id;
+        items += '<option  value=' + id + ' data-name=' + name
+            + '>' + display + '</option>';
 
-                var name = object.get("name");
-                var display = object.get("display");
+    }
+    $('#serviceStyle').empty();
+    $('#serviceStyle').append(items);
 
-                items += '<option  value=' + id + ' data-name=' + name
-                    + '>' + display + '</option>';
-
-
-            }
-            $('#cuisineStyle').empty();
-            $('#cuisineStyle').append(items);
-
-            setTimeout(function () { NProgress.done(); }, 100);
-
-
-        },
-        function (error) {
-            console.log("error");
-            setTimeout(function () { NProgress.done(); }, 100);
-
-        }
-    );
 }
 
-Restaurant.loadServiceStyle = function () {
-    var serviceStyle = Parse.Object.extend("RestaurantBizServiceStyle");
-    var query = new Parse.Query(serviceStyle);
-    query.ascending("code");
-    NProgress.start();
+Restaurant.displayAmbienceStyle = function (results) {
+    var items = '';
+    for (var i = 0; i < results.length; i++) {
+        var object = results[i];
+        var id = object.id;
 
-    query.find().then(
-        function (results) {
+        var name = object.get("name");
+        var display = object.get("display");
 
-            var items = '';
-            for (var i = 0; i < results.length; i++) {
-                var object = results[i];
-                var id = object.id;
+        items += '<option  value=' + id + ' data-name=' + name
+            + '>' + display + '</option>';
 
-                var name = object.get("name");
-                var display = object.get("display");
-
-                items += '<option  value=' + id + ' data-name=' + name
-                    + '>' + display + '</option>';
-
-
-            }
-            $('#serviceStyle').empty();
-            $('#serviceStyle').append(items);
-
-            setTimeout(function () { NProgress.done(); }, 100);
-
-
-        },
-        function (error) {
-            console.log("error");
-            setTimeout(function () { NProgress.done(); }, 100);
-
-        }
-    );
-}
-
-Restaurant.loadAmbienceStyle = function () {
-    var ambienceStyle = Parse.Object.extend("RestaurantBizAmbienceStyle");
-    var query = new Parse.Query(ambienceStyle);
-    query.ascending("code");
-    NProgress.start();
-
-    query.find().then(
-        function (results) {
-            var items = '';
-            for (var i = 0; i < results.length; i++) {
-                var object = results[i];
-                var id = object.id;
-
-                var name = object.get("name");
-                var display = object.get("display");
-
-                items += '<option  value=' + id + ' data-name=' + name
-                    + '>' + display + '</option>';
-
-
-            }
-            $('#ambienceStyle').empty();
-            $('#ambienceStyle').append(items);
-
-            setTimeout(function () { NProgress.done(); }, 100);
-
-
-        },
-        function (error) {
-            console.log("error");
-            setTimeout(function () { NProgress.done(); }, 100);
-
-        }
-    );
+    }
+    $('#ambienceStyle').empty();
+    $('#ambienceStyle').append(items);
 }
 
 Restaurant.clickAddRestaurantIcon = function (event) {
@@ -538,13 +433,10 @@ Restaurant.clickAddRestaurantIcon = function (event) {
     $('.empty').hide();
     $('.form-peice').show();
     Restaurant.nameError = true, Restaurant.contactNameError = true, Restaurant.contactPhoneError = true,
-    Restaurant.cityError = true, Restaurant.zipCodeError = true, Restaurant.descriptionError = true,
-    Restaurant.countryError = true, Restaurant.stateError = true, Restaurant.addressLine1Error = true;
+        Restaurant.cityError = true, Restaurant.zipCodeError = true, Restaurant.descriptionError = true,
+        Restaurant.countryError = true, Restaurant.stateError = true, Restaurant.addressLine1Error = true;
     $('#createRestaurantButton').show();
     $('#editRestaurantButton').hide();
-
-
-
 
 }
 
@@ -556,33 +448,36 @@ Restaurant.selectOption = function (e) {
     if (title == "Edit") {
         Restaurant.selectRestaurant(id);
     }
-    if(title == "Menu"){
+    if (title == "Menu") {
         Restaurant.selectMenu(id);
     }
-    if(title == "Orders"){
+    if (title == "Orders") {
         swal("Function not implemented");
     }
-    if(title == "Delete"){
-        swal({
-            title: "Are you sure?",
-            text: "",
-            icon: "warning",
-            buttons: true,
-            dangerMode: true,
-          })
-          .then((willDelete) => {
-            if (willDelete) {
-                Restaurant.deleteSelectedItem(id);
-            } else {
-              
-            }
-          });
-       
+    if (title == "Delete") {
+        Restaurant.destroyRestaurant(id);
     }
- 
+
 }
 
-Restaurant.selectMenu = function(id){
+Restaurant.destroyRestaurant = function (id) {
+    swal({
+        title: "Are you sure?",
+        text: "",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+    })
+        .then((willDelete) => {
+            if (willDelete) {
+                RestaurantService.destroyRestaurant(Restaurant.getSelectedRestaurant(id));
+            } else {
+
+            }
+        });
+}
+
+Restaurant.selectMenu = function (id) {
     console.log("Restaurant.selectMenu");
     var restaurant = Restaurant.getSelectedRestaurant(id);
     Menu.init(restaurant);
@@ -599,23 +494,23 @@ Restaurant.selectRestaurant = function (id) {
     $('#editRestaurantButton').show();
     // Fill item details
     $("#id").val(restaurant.id);
-    $("#contactId").val(restaurant.contactId);
-    $("#addressId").val(restaurant.addressId);
+    $("#contactId").val(restaurant.get("contact").id);
+    $("#addressId").val(restaurant.get("address").id);
     $("#name").focus();
-    $("#name").val(restaurant.name);
+    $("#name").val(restaurant.get("name"));
     $("#description").focus();
-    $("#description").val(restaurant.description);
+    $("#description").val(restaurant.get("description"));
     $("#note").focus();
-    $("#note").val(restaurant.note);
+    $("#note").val(restaurant.get("note"));
     $("#cuisineStyle").focus();
-    $("#cuisineStyle").val(restaurant.cuisineStyle);
+    $("#cuisineStyle").val(restaurant.get("cuisine").id);
     $("#ambienceStyle").focus();
-    $("#ambienceStyle").val(restaurant.ambienceStyle);
+    $("#ambienceStyle").val(restaurant.get("ambienceStyle").id);
     $("#serviceStyle").focus();
-    $("#serviceStyle").val(restaurant.serviceStyle);
+    $("#serviceStyle").val(restaurant.get("serviceStyle").id);
 
     var activeCheckBox = $('#retaurantActive');
-    var restaurantStatus = restaurant.active;
+    var restaurantStatus = restaurant.get("active");
     var isTrueSet = (restaurantStatus === 'true');
     if (isTrueSet) {
         activeCheckBox.prop('checked', true);
@@ -623,76 +518,28 @@ Restaurant.selectRestaurant = function (id) {
         activeCheckBox.prop('checked', false);
     }
 
-
-
     $("#country").focus();
-    $("#country").val(restaurant.country);
+    $("#country").val(restaurant.get("address").get("country"));
     $("#country").change();
     $("#state").focus();
-    $("#state").val(restaurant.state);
+    $("#state").val(restaurant.get("address").get("state"));
     $("#zipcode").focus();
-    $("#zipcode").val(restaurant.zipcode);
+    $("#zipcode").val(restaurant.get("address").get("zipCode"));
     $("#city").focus();
-    $("#city").val(restaurant.city);
+    $("#city").val(restaurant.get("address").get("city"));
     $("#addressline1").focus();
-    $("#addressline1").val(restaurant.address);
+    $("#addressline1").val(restaurant.get("address").get("address"));
 
 
     $("#contactName").focus();
-    $("#contactName").val(restaurant.contactName);
+    $("#contactName").val(restaurant.get("contact").get("name"));
     $("#contactPhone").focus();
-    $("#contactPhone").val(restaurant.phone);
+    $("#contactPhone").val(restaurant.get("contact").get("phone"));
 
     $("#contactEmail").focus();
-    $("#contactEmail").val(restaurant.email);
+    $("#contactEmail").val(restaurant.get("contact").get("email"));
 }
 
-// Restaurant.clickDeleteRestaurantIcon = function () {
-//     var selectedId = Restaurant.getSelectedItem();
-//     console.log(selectedId);
-
-//     if (selectedId != null) {
-//         Restaurant.deleteSelectedItem();
-//     } else {
-//         //sweetAlert("", "Select item to delete", "error");
-//     }
-// }
-Restaurant.deleteSelectedItem = function (id) {
-    var RestaurantBiz = Parse.Object.extend("RestaurantBiz");
-    var restaurantBiz = new RestaurantBiz();
-    restaurantBiz.set('id', id);
-    restaurantBiz.destroy(null).then(
-        function (res) {
-            console.log("saved");
-            $('.empty').show();
-            $('.form-peice').hide();
-            setTimeout(function () { NProgress.done(); }, 100);
-            Restaurant.loadRestaurants();
-
-
-        },
-        function (error) {
-            console.log("error");
-            $('.empty').show();
-            $('.form-peice').hide();
-            Restaurant.loadRestaurants();
-            setTimeout(function () { NProgress.done(); }, 100);
-
-        }
-    );
-}
-
-Restaurant.getSelectedItem = function () {
-    var restaurantId = null;
-    $('#restaurantList .list-group-item').each(function () {
-        var checkbox = $(this).find('input');
-        var checked = checkbox.is(':checked');
-        if (checked) {
-            restaurantId = checkbox.parent().attr("data-id");
-        }
-    });
-    return restaurantId;
-}
 
 Restaurant.getSelectedRestaurant = function (id) {
     for (var i = 0; i < Restaurant.restaurants.length; i++) {
