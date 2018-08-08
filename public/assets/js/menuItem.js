@@ -13,7 +13,7 @@ MenuItem.init = function (restaurant, menu) {
     MenuItem.menuItems = [];
 
     $("#menuItemsRestaurant").html(restaurant.get("name"));
-    $("#menuItemsRestaurantMenu").html(menu.name);
+    $("#menuItemsRestaurantMenu").html(menu.get("name"));
 
     $("#menuView").hide();
     $("#menuItemView").show();
