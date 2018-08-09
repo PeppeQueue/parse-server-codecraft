@@ -1,3 +1,4 @@
+require('newrelic');
 const resolve = require('path').resolve;
 
 var express = require('express');
