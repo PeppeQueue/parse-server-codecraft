@@ -26,6 +26,8 @@ Menu.init = function (restaurant) {
     MenuService.getRestaurantMenuList(restaurant);
 
     $('#addMenuIcon').click(Menu.clickAddNewMenuButton);
+
+    $("#createMenuButton").unbind('click');
     $('#createMenuButton').click(Menu.createNewMenu);
 
     $('.menuBackButton').click(Menu.goBackToRestaurantView);
