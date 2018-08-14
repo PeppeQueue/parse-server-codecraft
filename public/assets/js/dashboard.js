@@ -30,8 +30,20 @@ Dashboard.clickLogoutLink = function(){
 Dashboard.initConfigurations = function(){
   Parse.Config.get().then(function(config) {
     var dashboardMessage = config.get("dashboardMessage");
+    var defaultRestaurantImageUrl = config.get("defaultRestaurantImage").url();    
+    localStorage.setItem("defaultRestaurantImageUrl", defaultRestaurantImageUrl);
+    var defaultMenuItemImageUrl = config.get("defaultMenuItemImage").url();    
+    localStorage.setItem("defaultMenuItemImageUrl", defaultMenuItemImageUrl);
     var text = "";
     $("#dashboardMessage").text(dashboardMessage);    
+    var jsArray = config.get("fixedRestaurantMenuItemCats");
+    console.log(jsArray.length);
+    for(var i = 0;i<jsArray.length;i++){
+      var obj = jsArray[i];
+      console.log(obj.class);
+    }
+    
+    
   }, function(error) {
     
   });

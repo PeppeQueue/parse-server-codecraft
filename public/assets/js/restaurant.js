@@ -248,12 +248,33 @@ Restaurant.init = function () {
             restaurant.save(null).then(
                 function (res) {
                     console.log("saved");
+                    
+
+
+                    var restaurantFileUpload = $("#restaurantImage")[0];
+                    if (restaurantFileUpload.files.length > 0) {
+                        var file = restaurantFileUpload.files[0];
+                        var name = "photo.jpg";
+                        var imageFile = new Parse.File(name, file);
+                        imageFile.save().then(function () {
+                            res.set("image", imageFile);
+                            res.save();
+                            setTimeout(function () { NProgress.done(); }, 100);
+                            RestaurantService.getRestaurantList();
                     $('.empty').show();
                     $('.form-peice').hide();
-                    setTimeout(function () { NProgress.done(); }, 100);
+                            $('#restaurantCreateView').hide();
+                            $('#restaurantView').show();
+                        }, function (error) {
+                            // The file either could not be read, or could not be saved to Parse.
+                        });
+                    }else{
                     RestaurantService.getRestaurantList();
+                        $('.empty').show();
+                        $('.form-peice').hide();
                     $('#restaurantCreateView').hide();
                     $('#restaurantView').show();
+                    }      
 
 
                 },
@@ -313,7 +334,12 @@ Restaurant.displayRestaurantList = function (results) {
         var contactName = restaurant.get("contact").get("name");
         var phone = restaurant.get("contact").get("phone");
         var email = restaurant.get("contact").get("email");
-
+        var imgUrl = "";
+        if(restaurant.get("image") !== undefined){
+            imgUrl = restaurant.get("image").url();            
+        }else{
+            imgUrl = localStorage.getItem("defaultRestaurantImageUrl");
+        }
 
         Restaurant.restaurants.push(restaurant);
         var checked = "";
@@ -326,6 +352,7 @@ Restaurant.displayRestaurantList = function (results) {
 
         items += '<li class="list-group-item"'
             + '"> <label class="switch pull-right"><input type="checkbox" class="restaurant-active" data-id=' + id + '   ' + checked + '>  <span class="slider round"></span> </label>'
+            +'<div class="resImage"><img src="' + imgUrl + '" width="100px" height="100px"+/></div>'
             + '<div class="restaurantName">' + name + '</div>'
             + '<div>' + address + '</div>'
             + '<div>' + city + " " + state + " " + zipcode + " " + '</div>'

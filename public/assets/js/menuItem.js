@@ -497,13 +497,35 @@ MenuItem.clickCreateMenuItemButton = function (event) {
         restaurantMenuItem.set("restaurant", { "__type": "Pointer", "className": "RestaurantBiz", "objectId": MenuItem.restaurant.id });
         restaurantMenuItem.set("owner", { "__type": "Pointer", "className": "_User", "objectId": Parse.User.current().id });
         
+
+
+
         NProgress.start();
         restaurantMenuItem.save(null).then(
-            function (results) {
+            function (menuItem) {
                 $("#menuItemCreateView").hide();
                 $("#menuItemView").show();
+
+                var menuItemFileUpload = $("#menuItemImage")[0];
+                if (menuItemFileUpload.files.length > 0) {
+                    var file = menuItemFileUpload.files[0];
+                    var name = "photo.jpg";
+                    var imageFile = new Parse.File(name, file);
+                    imageFile.save().then(function () {
+                        menuItem.set("image", imageFile);
+                        menuItem.save();
                 MenuItem.loadMenuItems(MenuItem.menu);
                 setTimeout(function () { NProgress.done(); }, 100);
+                    }, function (error) {
+                        // The file either could not be read, or could not be saved to Parse.
+                    });
+                }else{
+                    MenuItem.loadMenuItems(MenuItem.menu);
+                    setTimeout(function () { NProgress.done(); }, 100);
+                }
+                
+
+                
             },
             function (error) {
                 setTimeout(function () { NProgress.done(); }, 100);
@@ -544,6 +566,11 @@ MenuItem.loadMenuItems = function (menu) {
                 menuItem.note = object.get("note");
 
                 menuItem.active = object.get("active");
+                if(object.get("image") !== undefined){
+                    menuItem.image = object.get("image").url();
+                    console.log(object.get("image").url());
+                }
+                
                 console.log(object.get("suppliedGroup"));
                 console.log(object.get("ownGroup"));
                 if (object.get("suppliedGroup")) {
@@ -608,6 +635,10 @@ MenuItem.displayMenuItems = function () {
                 var name = object.name;
                 var description = object.description;
                 var note = object.note;
+                var imgUrl  = object.image;
+                if(imgUrl == undefined){
+                    imgUrl = localStorage.getItem("defaultMenuItemImageUrl");
+                }
 
                 var checked = "";
                 if(object.active == true){
@@ -616,6 +647,7 @@ MenuItem.displayMenuItems = function () {
 
                 items += '<li class="list-group-item"'
                     + '"> <label class="switch pull-right"><input type="checkbox" class="menuitem-active" data-id=' + id + ' ' + checked + '>  <span class="slider round"></span> </label>'
+                    +'<div class="switch pull-left"><img src="' + imgUrl + '" width="50px" height="50px"+/></div>'
                     + '<div class="menuName">' + name + '</div>'
                     + '<div>' + note + '</div>'
 
