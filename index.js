@@ -25,9 +25,9 @@ var api = new ParseServer({
     preventLoginWithUnverifiedEmail:true,
     appName: "peppequeue",
     filesAdapter: new S3Adapter(
-		"S3_ACCESS_KEY",
-		"S3_SECRET_KEY",
-		"S3_BUCKET",
+		process.env.S3_ACCESS_KEY,
+		process.env.S3_SECRET_KEY,
+		process.env.S3_BUCKET,
 		{directAccess: true}
 	  ),
     emailAdapter: {
