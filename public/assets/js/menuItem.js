@@ -517,7 +517,10 @@ MenuItem.clickCreateMenuItemButton = function (event) {
                 MenuItem.loadMenuItems(MenuItem.menu);
                 setTimeout(function () { NProgress.done(); }, 100);
                     }, function (error) {
+                        console.log(error);
                         // The file either could not be read, or could not be saved to Parse.
+                        MenuItem.loadMenuItems(MenuItem.menu);
+                        setTimeout(function () { NProgress.done(); }, 100);
                     });
                 }else{
                     MenuItem.loadMenuItems(MenuItem.menu);
@@ -548,6 +551,7 @@ MenuItem.loadMenuItems = function (menu) {
     var restaurantMenuItem = Parse.Object.extend("RestaurantMenuItem");
     var query = new Parse.Query(restaurantMenuItem);
     query.equalTo("menu", { "__type": "Pointer", "className": "RestaurantMenu", "objectId": menu.id });
+    query.descending("createdAt");
     query.include("suppliedGroup");
     query.include("ownGroup");
     NProgress.start();
