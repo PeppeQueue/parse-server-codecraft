@@ -39,6 +39,7 @@ MenuService.createMenu = function(name,description,note,restaurant){
 MenuService.getRestaurantMenuList = function(restaurant){
     var relation = restaurant.relation("menus");
     var query = relation.query();
+    query.descending("createdAt");
     NProgress.start();
     query.find().then(
         function (menus) {

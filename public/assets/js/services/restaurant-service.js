@@ -6,6 +6,7 @@ RestaurantService.getRestaurantList = function(){
     var restaurantBiz = Parse.Object.extend("RestaurantBiz");
     var query = new Parse.Query(restaurantBiz);
     query.equalTo("owner", { "__type": "Pointer", "className": "_User", "objectId": Parse.User.current().id });
+    query.descending("createdAt");
     query.include("contact");
     query.include("address");
     NProgress.start();    
