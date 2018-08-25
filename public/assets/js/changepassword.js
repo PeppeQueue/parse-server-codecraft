@@ -139,26 +139,27 @@ ChangePassword.onCompleteCurrentPassword = function(){
   var email = currentUser.get('email');
   var password = $("#currentPassword").val();
   $("#loader").css("display","block");
-  Parse.User.logIn(email, password, {
-      success: function(user) {
+  
+  
+  Parse.User.logIn(email,password).then(
+         function(user){
          $("#loader").css("display","none");
          console.log(JSON.stringify(user));
          $("#changePasswordMessage").text(""); 
          currentPasswordError = false; 
-
       },
-      error: function(user, error) {
+         function(error){
          $("#loader").css("display","none");
          console.log("Error: " + error.code + " " + error.message);
          if(error.code == 101){
             $("#changePasswordMessage").text("Your current password is not matched");  
             currentPasswordError = true; 
          }
+         }
                
+  );
 
       }
-    });
-}
 
 ChangePassword.onClickSignIn = function(){
     window.location.href = "/"
