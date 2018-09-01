@@ -557,7 +557,7 @@ input:-webkit-autofill {
   color: #e91515;
 }
 
-.menus {
+.menus,.workers {  
   *zoom: 1;
 }
 
@@ -753,4 +753,16 @@ input[type=checkbox]{
   height:30px;
   width:100%;
   background:#999;
+}
+
+.pinButton{
+  font-size: 13px;
+  text-transform: uppercase;
+  padding: 5px 30px;
+  background: #f95959;
+  color: #fff;
+  margin-right: 20px;
+  border: none;
+  font-family: "Montserrat", sans-serif;
+  margin-top: 5px;
 }

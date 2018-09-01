@@ -18,7 +18,7 @@ div.restaurantName {
     color: #e91515;
   }
 
-.panel-heading-restaurant{
+.panel-heading-restaurant,.panel-heading-worker{
     font-size: 18pt;
     background: #304150;
     color: white;

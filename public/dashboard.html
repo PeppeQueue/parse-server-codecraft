@@ -34,12 +34,14 @@
   <script src="/public/assets/js/countries.js"> </script>
   <script src="/public/assets/js/config.js"> </script>
   <script src="/public/assets/js/jquery.multiselect.js"> </script>
+  <script src="/public/assets/js/worker.js"> </script>
 
   <script src="/public/assets/js/util.js"> </script>
   <script src="/public/assets/js/menuItem.js"> </script>
 
- <script src="/public/assets/js/services/menu-service.js"> </script>
+  <script src="/public/assets/js/services/menu-service.js"> </script>
   <script src="/public/assets/js/services/restaurant-service.js"> </script>
+  <script src="/public/assets/js/services/worker-service.js"> </script>
 
 
   <!------ Include the above in your HEAD tag ---------->
@@ -138,19 +140,25 @@
                 <span class="menu-text">MENU</span>
               </a>
             </li> -->
+            <li name="Worker" id="workers">
+              <a href="#">
+                <i class="fas fa-users-cog fa-2x"></i>
+                <span class="menu-text">WORKERS</span>
+              </a>
+            </li>
             <li name="Orders" id="orders">
               <a href="#">
                 <i class="fas fa-book fa-2x"></i>
                 <span class="menu-text">ORDERS</span>
               </a>
             </li>
-
-            <li name="Workers" id="workers">
+            <li name="Banking" id="banking">
               <a href="#">
-                <i class="fas fa-users-cog fa-2x"></i>
-                <span class="menu-text">WORKERS</span>
+                <i class="fas fa-university fa-2x"></i>
+                <span class="menu-text">BANKING</span>
               </a>
             </li>
+           
             <li name="Reports" id="reports">
               <a href="#">
                 <i class="fa fa-list-alt fa-2x"></i>
@@ -846,20 +854,95 @@
 <div class="container main" id="workers-container">
   <section id="formHolder">
 
-    <div class="row">
+    <div class="row brand" id="workerView">
+      <div class="col-sm-3 form"></div>
+      <div class="col-sm-6 form">
+        <div class="workers" id="worker">
+          <!-- <div>
+            <a href="">
+              <span class="menuBackButton">
+                <i class="fas fa-caret-left"></i>BACK</span>
+            </a>
+          </div> -->
+          <div class="panel panel-default">
+            <div class="panel-heading-worker">
+                WORKERS
+              <a id="addWorkerIcon" href="" class="pull-right add-edit-app">
+                <i class="fa fa-plus-square fa-lg"></i>
+              </a>
+            </div>
+            <div class="panel-body">
+            </div>
+            <ul class="list-group" id="workerList">
 
-      <!-- Brand Box -->
-      <div class="col-sm-12 brand">
 
-        <div class="heading">
-          <a href="/dashboard" class="logo">PEPPE
-            <span>Q</span>
-          </a>
-          <p>WORKERS</p>
+            </ul>
+          </div>
+          <ul class="pagination pagination-sm pull-right" >
+          </ul>
         </div>
 
       </div>
+      <div class="col-sm-3 form"></div>
+    </div>
+    <div class="row brand" id="workerCreateView">
+      <div class="col-sm-3 form"></div>
+      <div class="col-sm-6 form">
+          <div>
+              <a href="">
+                <span class="backButton" id="workerCreateViewBackButton">
+                  <i class="fas fa-caret-left"></i>BACK</span>
+          </a>
+        </div>
 
+        <div class="create menu-form-peice">
+
+          <form class="menu-form">
+            <div class="panel-heading-menu">Worker </div>
+           
+
+
+            <div class="form-group">
+              <label for="workerName"> Name</label>
+              <input type="text" name="workerName" id="workerName" class="create-workerName" autocomplete="off">
+              <input type="hidden" name="workerId" id="workerId">
+              <span class="error"></span>
+            </div>
+            <div class="form-group">
+              <label for="workerPhone">Phone</label>
+              <input type="text" name="workerPhone" id="workerPhone" class="create-workerPhone" autocomplete="off">
+              <span class="error"></span>
+            </div>
+            <div class="form-group">
+              <label for="workerEmail">Email</label>
+              <input type="text" name="workerEmail" id="workerEmail" class="create-workerEmail" autocomplete="off">
+              <span class="error"></span>
+            </div>
+            <div class="form-group">
+              <label for="workerRestaurant" class="active"> RESTAURANT</label>
+              <select class="form-control create-workerRestaurant" id="workerRestaurant" name="workerRestaurant"></select>
+              <span class="error"></span>
+      </div>
+
+            <div class="form-group">
+              <p>
+                <br/> </p>
+            </div>
+            <div class="form-group">
+              <div class="CTA">
+                <input type="submit" value="CREATE WORKER" id="createWorkerButton">
+                <input type="submit" value="SAVE WORKER" id="editWorkerButton">
+
+              </div>
+            </div>
+
+
+
+          </form>
+
+        </div>
+      </div>
+      <div class="col-sm-3 form"></div>
     </div>
 
   </section>

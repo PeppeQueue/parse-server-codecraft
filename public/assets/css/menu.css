@@ -34,7 +34,7 @@
     color: #e91515;
   }
   
-div.menuName {
+div.menuName,div.workerName {
     text-transform: uppercase;
     font-size: 12pt;
 }
