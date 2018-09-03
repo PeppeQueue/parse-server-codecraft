@@ -43,7 +43,7 @@ Parse.Cloud.beforeSave("Worker", function (request, response) {
 
 Parse.Cloud.beforeSave("RestaurantMenu", function (request, response) {
 
-    var userId = request.object.get("owner");
+    var userId = request.object.get("owner").id;
     var menuItemGroupSupplied = Parse.Object.extend("RestaurantMenuItemGroupSupplied");
     var query = new Parse.Query(menuItemGroupSupplied);
 
