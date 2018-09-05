@@ -2,18 +2,31 @@ function Worker() {
 
 }
 Worker.workers = [];
+Worker.restaurants = [];
+Worker.restaurant= null;
 
-Worker.init = function () {
+Worker.init = function (restaurant) {
 
     Parse.initialize(Config.PARSE_APP_ID);
     Parse.serverURL = Config.PARSE_SERVER_URL;
     var currentUser = Parse.User.current();
-    
+    $('#workerView').show();
     $('#workerCreateView').hide();
 
+    if(restaurant == undefined){
+        WorkerService.getWorkerList(currentUser);
+        WorkerService.getRestaurantList();
+        Worker.restaurant = null;
+        $('#workerSelectedRestaurantName').html("");
+    }else{
+        Worker.restaurant = restaurant;
+        WorkerService.getWorkerListByRestaurant(restaurant);
+        $('#workerSelectedRestaurantName').html(restaurant.get("name"));
 
-    WorkerService.getWorkerList(currentUser);
     WorkerService.getRestaurantList();
+    }
+
+    
     
     
     $('#worker-container').show();
@@ -42,6 +55,7 @@ Worker.displayRestaurantList = function (results) {
         var id = object.id;
 
         var name = object.get("name");        
+        Worker.restaurants.push(object);      
 
         items += '<option  value=' + id + ' data-name=' + name
             + '>' + name + '</option>';
@@ -52,12 +66,22 @@ Worker.displayRestaurantList = function (results) {
 
 }
 
+Worker.getRestaurant = function (id) {
+    for (var i = 0; i < Worker.restaurants.length; i++) {
+        var restaurant = Worker.restaurants[i];
+        if (restaurant.id == id) {
+            return restaurant;
+        }
+    }
+}
+
 Worker.createNewWorker = function(event){
     event.preventDefault();    
     var name = $("#workerName").val();
     var phone = $("#workerPhone").val();
     var email = $("#workerEmail").val();
-    var restaurant = $("#workerRestaurant").val();
+    var restaurantId = $("#workerRestaurant").val();
+    var restaurant = Worker.getRestaurant(restaurantId);
 
     if (name == "" || phone == "" || email == "") {
         $('.create-workerName, .create-workerPhone, .create-workerEmail').blur();
@@ -86,6 +110,10 @@ Worker.clickAddNewWorkerButton = function(event){
     $("#workerName").val("");
     $("#workerPhone").val("");
     $("#workerEmail").val("");
+
+    if(Worker.restaurant != null){
+        $("#workerRestaurant").val(Worker.restaurant.id);        
+    }
 }
 
 Worker.displayWorkerList = function (results) {
@@ -195,7 +223,8 @@ Worker.editWorker = function (event) {
     var name = $("#workerName").val();
     var phone = $("#workerPhone").val();
     var email = $("#workerEmail").val();
-    var restaurant = $("#workerRestaurant").val();
+    var restaurantId = $("#workerRestaurant").val();
+    var restaurant = Worker.getRestaurant(restaurantId);
     if (name == "" || phone == "" || email == "") {
         $('.create-workerName, .create-workerPhone, .create-workerEmail').blur();
     } else {

@@ -366,6 +366,8 @@ Restaurant.displayRestaurantList = function (results) {
             + '<i class="fas fa-book fa-lg" ></i>'
             + '</a><a href="" rel="tooltip" title="Menu" data-id=' + id + '>'
             + '<i class="fas fa-utensils fa-lg" ></i>'
+            + '</a><a href="" rel="tooltip" title="Workers" data-id=' + id + '>'
+            + '<i class="fas fa-users-cog fa-lg" ></i>'
             + '</a><a href="" rel="tooltip" title="Edit" data-id=' + id + '>'
             + '<i class="fas fa-edit fa-lg" ></i>'
             + '</a> <a href=""  rel="tooltip" title="Delete" data-id=' + id + '>'
@@ -475,6 +477,9 @@ Restaurant.selectOption = function (e) {
     if (title == "Edit") {
         Restaurant.selectRestaurant(id);
     }
+    if (title == "Workers") {
+        Restaurant.selectWorkers(id);
+    }
     if (title == "Menu") {
         Restaurant.selectMenu(id);
     }
@@ -509,6 +514,15 @@ Restaurant.selectMenu = function (id) {
     var restaurant = Restaurant.getSelectedRestaurant(id);
     Menu.init(restaurant);
 }
+
+Restaurant.selectWorkers = function(id){
+    var restaurant = Restaurant.getSelectedRestaurant(id);
+    selectMainTabById("workers");
+    $("#restaurantView").hide();
+    Worker.init(restaurant);
+}
+
+
 
 Restaurant.selectRestaurant = function (id) {
     var restaurant = Restaurant.getSelectedRestaurant(id);

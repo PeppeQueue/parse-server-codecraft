@@ -54,3 +54,10 @@ function enableListItemClick(){
         }
       });
 }
+
+function selectMainTabById(id){
+  $(".navbar-ul li").removeClass('active-list');
+  var container = id + "-container";
+  $('#' + container).show();
+  $('#'+id).addClass('active-list');
+}
