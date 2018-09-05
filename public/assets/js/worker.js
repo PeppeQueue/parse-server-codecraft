@@ -113,6 +113,9 @@ Worker.clickAddNewWorkerButton = function(event){
 
     if(Worker.restaurant != null){
         $("#workerRestaurant").val(Worker.restaurant.id);        
+        $("#workerRestaurant").prop("disabled", true);      
+    }else{
+        $("#workerRestaurant").prop("disabled", false);  
     }
 }
 
@@ -214,6 +217,11 @@ Worker.selectWorker = function(id){
     $("#workerEmail").val(worker.get("email"));
     $("#workerRestaurant").val(worker.get("restaurant").id);
     $('#createWorkerButton').hide();
+    if(Worker.restaurant != null){        
+        $("#workerRestaurant").prop("disabled", true);      
+    }else{
+        $("#workerRestaurant").prop("disabled", false);  
+    }
     $('#editWorkerButton').show();
     $('#editWorkerButton').click(Worker.editWorker);
 }
