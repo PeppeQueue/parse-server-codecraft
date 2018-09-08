@@ -41,9 +41,11 @@ Parse.Cloud.beforeSave("Worker", function (request, response) {
 
 });
 
-Parse.Cloud.beforeSave("RestaurantMenu", function (request, response) {
+Parse.Cloud.afterSave("RestaurantMenu", function (request) {
 
     var userId = request.object.get("owner").id;
+    var restaurantId = request.object.get("restaurant").id;
+    var menuId = request.object.id;
     var menuItemGroupSupplied = Parse.Object.extend("RestaurantMenuItemGroupSupplied");
     var query = new Parse.Query(menuItemGroupSupplied);
 
@@ -62,6 +64,8 @@ Parse.Cloud.beforeSave("RestaurantMenu", function (request, response) {
                 var menuItemGroup = Parse.Object.extend("RestaurantMenuItemGroup");
                 var query = new Parse.Query(menuItemGroup);
                 query.equalTo("owner", { "__type": "Pointer", "className": "_User", "objectId": userId });
+                query.equalTo("restaurant", { "__type": "Pointer", "className": "RestaurantBiz", "objectId": restaurantId });
+                query.equalTo("menu", { "__type": "Pointer", "className": "RestaurantMenu", "objectId": menuId });
                 query.equalTo("name", name);
                 return query.find().then(
                     function (results) {
@@ -74,6 +78,8 @@ Parse.Cloud.beforeSave("RestaurantMenu", function (request, response) {
                             menuItemGroup.set("note", note);
                             menuItemGroup.set("description", description);
                             menuItemGroup.set("owner", { "__type": "Pointer", "className": "_User", "objectId": userId });
+                            menuItemGroup.set("restaurant", { "__type": "Pointer", "className": "RestaurantBiz", "objectId": restaurantId });
+                            menuItemGroup.set("menu", { "__type": "Pointer", "className": "RestaurantMenu", "objectId": menuId });
                             menuItemGroup.save();
                             console.log("no group found with name" + name);
                         }
@@ -87,7 +93,7 @@ Parse.Cloud.beforeSave("RestaurantMenu", function (request, response) {
         return promise;
 
     }).then(function () {
-        response.success(); 
+        //response.success(); 
 
     });
 
