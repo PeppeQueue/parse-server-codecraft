@@ -12,11 +12,7 @@ Parse.Cloud.define('createBizAccount',function(req,res){
   }, function (err, account) {
      console.log(err);
      console.log(account); 
-     if(err != null){
-      res.success(account);
-     }else{
-       res.error(err);
-     }
+     res.success(account);
     
   });
 });
