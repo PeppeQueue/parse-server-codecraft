@@ -11,9 +11,11 @@
    "dependencies": {
       "express": "~4.11.x",
       "kerberos": "~0.0.x",
+      "newrelic": "^4.7.0",
       "parse": "~1.8.0",
       "parse-server": "2.8.1",
-      "parse-server-mailgun": "^2.4.8"
+      "parse-server-mailgun": "^2.4.8",
+      "stripe": "^6.17.0"
    },
    "scripts": {
       "start": "node index.js"

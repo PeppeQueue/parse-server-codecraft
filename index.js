@@ -1,7 +1,9 @@
+require('newrelic');
 const resolve = require('path').resolve;
 
 var express = require('express');
 var ParseServer = require('parse-server').ParseServer;
+var S3Adapter = require('parse-server').S3Adapter;
 var path = require('path');
 
 var databaseUri = process.env.DATABASE_URI || process.env.MONGODB_URI;
@@ -22,7 +24,12 @@ var api = new ParseServer({
     verifyUserEmails: true,
     preventLoginWithUnverifiedEmail:true,
     appName: "peppequeue",
-    
+    filesAdapter: new S3Adapter(
+		process.env.S3_ACCESS_KEY,
+		process.env.S3_SECRET_KEY,
+		process.env.S3_BUCKET,
+		{directAccess: true}
+	  ),
     emailAdapter: {
 	module: 'parse-server-mailgun',
 	options: {
@@ -97,6 +104,10 @@ app.get('/verify-email-success', function(req, res) {
 app.get('/password-rest-success', function(req, res) {  
    res.sendFile(path.join(__dirname, '/public/password-rest-success.html'));
 });
+
+app.get('/pricing', function(req, res) {  
+	res.sendFile(path.join(__dirname, '/public/pricing.html'));
+ });
 
 var port = process.env.PORT || 1337;
 var httpServer = require('http').createServer(app);

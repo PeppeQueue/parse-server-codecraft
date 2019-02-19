@@ -16,6 +16,14 @@ Login.init = function() {
 
     var forgotPasswordEmailError = true;
 
+    Parse.initialize(Config.PARSE_APP_ID);
+    Parse.serverURL = Config.PARSE_SERVER_URL;
+
+    var currentUser = Parse.User.current();
+    if(currentUser){
+        window.location.href = "/dashboard"
+    }
+
     $("#signUpDiv").hide();
     $("#forgotPasswordDiv").hide();
     $('#signUpLink').click(function (e) {
@@ -76,11 +84,10 @@ Login.init = function() {
     
      
    
-    Parse.initialize(Config.PARSE_APP_ID);
-    Parse.serverURL = Config.PARSE_SERVER_URL;
+   
 
     //clear user local datastorage
-    Parse.User.logOut();
+    //Parse.User.logOut();
 
     
     $('input').blur(function () {
@@ -243,13 +250,13 @@ Login.init = function() {
     $('form.login-form').submit(function (event) {
         
         event.preventDefault();
-
-        if (signInEmailError == true || signInPasswordError == true ) {
+        var email = $("#signInEmail").val();
+        var password = $("#signInPassword").val();
+        if (email == "" || password == "" ) {
             $('.signin-email, .signin-pass').blur();
         } else {
 
-              var email = $("#signInEmail").val();
-              var password = $("#signInPassword").val();  
+                
   
 
              $("#loader").css("display","block");

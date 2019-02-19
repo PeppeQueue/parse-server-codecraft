@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
+<link rel="icon" type="image/x-icon" href="/public/favicon.ico" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="/public/assets/css/login.css">
 
@@ -18,7 +18,9 @@
 <!-- Latest compiled JavaScript -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-<script src="https://npmcdn.com/parse/dist/parse.min.js"> </script>
+<!-- todo change to latest once regeneratorRuntime is not defined issue resolved
+<script src="https://npmcdn.com/parse/dist/parse.min.js"> </script>-->
+<script src="https://npmcdn.com/parse@2.1.0/dist/parse.min.js"></script>
 
 <script src="/public/assets/js/login.js"> </script>
 <script src="/public/assets/js/config.js"> </script>
@@ -61,7 +63,7 @@
      
      
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Plans and Pricing</a></li>
+        <li><a href="/pricing">Plans and Pricing</a></li>
 		    <li><a href="#">Documentation</a></li>
         <li> <button  class="sign-in">SignIn</button></li>
 
@@ -144,7 +146,7 @@
 
                   <div class="CTA">
                      Having trouble signing in?
-                     <a href="#" class="switch" id="forgotPasswordLink">Reset Your Password</a>
+                     <a href="#" class="switch" id="forgotPasswordLink">Forgot Your Password</a>
                   </div>
                </form>
             </div><!-- End Login Form -->
@@ -335,7 +337,7 @@
       <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-2 text-center text-white">
           
-          <p class="h6">PEPPEQ 2018 &copy All right Reversed.</p>
+          <p class="h6">PEPPEQ 2019 &copy All right Reversed.</p>
         </div>
         </hr>
       </div>  
