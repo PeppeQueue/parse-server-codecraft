@@ -30,9 +30,9 @@ Dashboard.clickLogoutLink = function(){
 Dashboard.initConfigurations = function(){
   Parse.Config.get().then(function(config) {
     var dashboardMessage = config.get("dashboardMessage");
-    var defaultRestaurantImageUrl = config.get("defaultRestaurantImage").url();    
+    var defaultRestaurantImageUrl = config.get("defaultRestaurantImage");;    
     localStorage.setItem("defaultRestaurantImageUrl", defaultRestaurantImageUrl);
-    var defaultMenuItemImageUrl = config.get("defaultMenuItemImage").url();    
+    var defaultMenuItemImageUrl = config.get("defaultMenuItemImage");    
     localStorage.setItem("defaultMenuItemImageUrl", defaultMenuItemImageUrl);
     var text = "";
     $("#dashboardMessage").text(dashboardMessage);    
