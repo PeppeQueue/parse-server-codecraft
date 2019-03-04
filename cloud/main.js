@@ -9,7 +9,8 @@ Parse.Cloud.beforeSave("RestaurantMenuItemGroup", function (request) {
         query.select("code");
         query.descending("code");
 
-        var lastItemGroup = await query.first();
+        var lastItemGroup =  query.first();
+        console.log(JSON.stringify(lastItemGroup) );
         var newId = lastItemGroup.get("code") + 1;
         request.object.set("code", newId);  
 
