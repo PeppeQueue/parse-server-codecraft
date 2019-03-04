@@ -1,6 +1,6 @@
 require("./functions/hello");
 
-Parse.Cloud.beforeSave("RestaurantMenuItemGroup", function (request) {
+Parse.Cloud.beforeSave("RestaurantMenuItemGroup",  (request) => {
 
     //check if this is a new or existing item
     if (request.object.isNew()) {
