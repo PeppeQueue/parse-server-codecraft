@@ -27,16 +27,13 @@ Parse.Cloud.beforeSave("RestaurantMenuItemGroup", function (request, response) {
 
 });
 
-Parse.Cloud.beforeSave("Worker", function (request, response) {
+Parse.Cloud.beforeSave("Worker", function (request) {
 
     //check if this is a new or existing item
-    if (!request.object.isNew()) {
-        response.success();
-    } else {
+    if (request.object.isNew()) {
         var autoPin = Math.floor(Math.random() * 10) + "" + Math.floor(Math.random() * 10) + "" + Math.floor(Math.random() * 10) +
             Math.floor(Math.random() * 10) + "" + Math.floor(Math.random() * 10) + "" + Math.floor(Math.random() * 10);
-        request.object.set("pin", autoPin);
-        response.success();
+        request.object.set("pin", autoPin);       
     }
 
 });
