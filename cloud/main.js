@@ -5,7 +5,12 @@ Parse.Cloud.beforeSave("RestaurantMenuItemGroup",  (request) => {
     //check if this is a new or existing item
     if (request.object.isNew()) {
 
-        var lastItemGroup = readLastInsertedCode();
+        var restaurantMenuItemGroup = Parse.Object.extend("RestaurantMenuItemGroup");
+        var query = new Parse.Query(restaurantMenuItemGroup);
+        query.select("code");
+        query.descending("code");
+
+        var lastItemGroup =  await query.first();
         console.log("selecred last item group" + JSON.stringify(lastItemGroup) );
         var newId = lastItemGroup.get("code") + 1;
         request.object.set("code", newId); 
