@@ -1,28 +1,28 @@
 require("./functions/hello");
 
-Parse.Cloud.beforeSave("RestaurantMenuItemGroup", function (request, response) {
+Parse.Cloud.beforeSave("RestaurantMenuItemGroup", function (request) {
 
     //check if this is a new or existing item
-    if (!request.object.isNew()) {
-        response.success();
-    } else {
-
+    if (request.object.isNew()) {
         var restaurantMenuItemGroup = Parse.Object.extend("RestaurantMenuItemGroup");
         var query = new Parse.Query(restaurantMenuItemGroup);
         query.select("code");
         query.descending("code");
 
-        query.first().then(
+        let lastItemGroup = await query.first();
+        var newId = lastItemGroup.get("code") + 1;
+        request.object.set("code", newId);  
+
+      /*  query.first().then(
             function (lastItemGroup) {
                 //increase the code by 1
                 var newId = lastItemGroup.get("code") + 1;
-                request.object.set("code", newId);
-                response.success();
+                request.object.set("code", newId);               
             },
             function (error) {
-                response.error(error);
+                throw 'error creating automatic code'; 
             }
-        );
+        );*/
     }
 
 });
