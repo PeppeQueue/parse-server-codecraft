@@ -4,15 +4,13 @@ Parse.Cloud.beforeSave("RestaurantMenuItemGroup", function (request) {
 
     //check if this is a new or existing item
     if (request.object.isNew()) {
-        var restaurantMenuItemGroup = Parse.Object.extend("RestaurantMenuItemGroup");
-        var query = new Parse.Query(restaurantMenuItemGroup);
-        query.select("code");
-        query.descending("code");
 
-        var lastItemGroup =  query.first();
+        var lastItemGroup = readLastInsertedCode();
         console.log("selecred last item group" + JSON.stringify(lastItemGroup) );
         var newId = lastItemGroup.get("code") + 1;
-        request.object.set("code", newId);  
+        request.object.set("code", newId); 
+        
+        
 
       /*  query.first().then(
             function (lastItemGroup) {
@@ -27,6 +25,16 @@ Parse.Cloud.beforeSave("RestaurantMenuItemGroup", function (request) {
     }
 
 });
+
+readLastInsertedCode = async function (){
+    var restaurantMenuItemGroup = Parse.Object.extend("RestaurantMenuItemGroup");
+    var query = new Parse.Query(restaurantMenuItemGroup);
+    query.select("code");
+    query.descending("code");
+
+    var lastItemGroup =  await query.first();
+    return lastItemGroup;
+};
 
 Parse.Cloud.beforeSave("Worker", function (request) {
 
