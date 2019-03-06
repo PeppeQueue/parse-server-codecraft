@@ -20,7 +20,7 @@
    },
    "scripts": {
       "start": "node local-index.js",
-      "//": "DEBUG=* node index.js "
+      "//": "DEBUG=* node index.js"
    },
    "engines": {
       "node": ">=4.3"
