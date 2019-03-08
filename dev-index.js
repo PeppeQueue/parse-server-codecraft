@@ -6,7 +6,7 @@ const { ParseServer } = require('parse-server');
 const { S3Adapter } = require('parse-server');
 const path = require('path');
 
-const databaseUri = process.env.DATABASE_URI || process.env.MONGODB_URI;
+const databaseUri = process.env.DATABASE_URI || process.env.MONGODB_URI ;
 
 if (!databaseUri) {
 	console.log('DATABASE_URI not specified, falling back to localhost.');
