@@ -21,6 +21,8 @@ const api = new ParseServer({
 	appId: process.env.APP_ID,
 	masterKey: process.env.MASTER_KEY,
 	publicServerURL: process.env.SERVER_URL,
+	verifyUserEmails: true,
+	preventLoginWithUnverifiedEmail: true,
 	appName: 'peppequeue',
 	filesAdapter: new S3Adapter(
 		process.env.S3_ACCESS_KEY,
@@ -28,6 +30,41 @@ const api = new ParseServer({
 		process.env.S3_BUCKET,
 		{ directAccess: true },
 	),
+	emailAdapter: {
+		module: 'parse-server-mailgun',
+		options: {
+			fromAddress: process.env.EMAIL_FROM,
+			domain: process.env.MAILGUN_DOMAIN,
+			apiKey: process.env.MAILGUN_API_KEY,
+
+			templates: {
+				passwordResetEmail: {
+					subject: 'Reset your password',
+					pathPlainText: resolve(__dirname, 'public/email-templates/password_reset_email.txt'),
+					pathHtml: resolve(__dirname, 'public/email-templates/password_reset_email.html'),
+					callback: user => ({ firstName: user.get('firstName') }),
+					// Now you can use {{firstName}} in your templates
+				},
+				verificationEmail: {
+					subject: 'Confirm your account',
+					pathPlainText: resolve(__dirname, 'public/email-templates/verification_email.txt'),
+					pathHtml: resolve(__dirname, 'public/email-templates/verification_email.html'),
+					callback: user => ({ firstName: user.get('firstName') }),
+					// Now you can use {{firstName}} in your templates
+				},
+				customEmailAlert: {
+					subject: 'Urgent notification!',
+					pathPlainText: resolve(__dirname, 'public/email-templates/custom_alert.txt'),
+					pathHtml: resolve(__dirname, 'public/email-templates/custom_alert.html'),
+				},
+			},
+		},
+	},
+	customPages: {
+		invalidLink: `${process.env.PUBLIC_SERVER_URL}invalid-link`,
+		verifyEmailSuccess: `${process.env.PUBLIC_SERVER_URL}verify-email-success`,
+		passwordResetSuccess: `${process.env.PUBLIC_SERVER_URL}password-rest-success`,
+	},
 });
 
 const app = express();
