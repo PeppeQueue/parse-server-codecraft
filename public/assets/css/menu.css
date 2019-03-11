@@ -1,0 +1,128 @@
+.pulldown-caption {
+    font-size: 12px;
+    font-weight: 400;
+    text-transform: uppercase; 
+    font-family: "Montserrat", sans-serif;
+    transform: translateY(50px);
+    transition: all 0.4s;
+    cursor: text;
+     z-index: -1; 
+    margin-bottom: 13px;
+}
+
+.form-group select{
+    margin-top: 25px;
+    min-width:150px;
+}
+
+.form form left-align{
+  left:0% !important;
+}
+
+.action-items-menu  {
+    float: right;
+}
+
+.action-items-menu a {
+    display: inline-block;
+    color: white;
+    padding-left: 15px;
+    padding-right:15px;
+}
+
+.action-items-menu a:hover {
+    color: #e91515;
+  }
+  
+div.menuName,div.workerName {
+    text-transform: uppercase;
+    font-size: 12pt;
+}
+
+.form .menu-form { 
+   
+    width: 50%;
+    margin-top: -5px;
+  }
+
+  .panel-heading-menu {
+    font-size: 18pt;
+    background: #304150;
+    color: white;
+    text-transform: uppercase;
+}
+
+.panel-heading-menu-sub {
+    font-size: 14pt;
+    background: #304150;
+    color: white;
+    text-transform: uppercase;
+}
+
+.panel-heading-menuitem-sub {
+    font-size: 14pt;
+    
+    color: white;
+    text-transform: uppercase;
+    margin-bottom: 25px;
+}
+
+.form .menu-form-peice {
+    background: #304150;
+    min-height: 480px;
+    margin-top: 0px;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);  
+    padding: 30px 0 60px;
+    transition: all 0.9s cubic-bezier(1, -0.375, 0.285, 0.995);   
+    top: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .form-group .CTA input {
+    font-size: 13px;
+    text-transform: uppercase;
+    padding: 5px 30px;
+    background: #f95959;
+    color: #fff;
+    border-radius: 30px;
+    margin-right: 20px;
+    border: none;
+    font-family: "Montserrat", sans-serif;
+}
+.background-peppe{
+    background: #304150;
+}
+
+.panel-menu{
+    background: #304150;
+}
+
+.backButton,.menuBackButton,.menuItemBackButton{
+    font-size: 13px;
+    text-transform: uppercase;
+    padding: 5px 30px;
+    background: #f95959;
+    color: #fff;
+    border-radius: 30px;
+    margin-right: 20px;
+    border: none;
+    font-family: "Montserrat", sans-serif;
+    margin-top: 5px;
+}
+
+.action-items-menuitem  {
+    float: right;
+}
+
+.action-items-menuitem a {
+    display: inline-block;
+    color: white;
+    padding-left: 15px;
+    padding-right:15px;
+}
+
+.action-items-menuitem a:hover {
+    color: #e91515;
+  }

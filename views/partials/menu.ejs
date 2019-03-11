@@ -1,0 +1,360 @@
+<section id="formHolder">
+
+    <div class="row brand" id="menuView">
+        <div class="col-sm-3 form"></div>
+        <div class="col-sm-6 form">
+            <div class="menus" id="menus">
+                <div>
+                    <a href="">
+                        <span class="menuBackButton">
+                            <i class="fas fa-caret-left"></i>BACK</span>
+                    </a>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading-restaurant">
+
+
+                        <span id="selectedRestaurantName"></span> - MENUS
+                        <a id="addMenuIcon" href="" class="pull-right add-edit-app">
+                            <i class="fa fa-plus-square fa-lg"></i>
+                        </a>
+                    </div>
+                    <div class="panel-body">
+                    </div>
+                    <ul class="list-group" id="menuList">
+
+
+                    </ul>
+                </div>
+                <ul class="pagination pagination-sm pull-right" id="applications-pagination">
+                </ul>
+            </div>
+
+        </div>
+        <div class="col-sm-3 form"></div>
+    </div>
+    <div class="row brand" id="menuCreateView">
+        <div class="col-sm-3 form"></div>
+        <div class="col-sm-6 form">
+            <div>
+                <a href="">
+                    <span class="backButton" id="menuCreateViewBackButton">
+                        <i class="fas fa-caret-left"></i>BACK</span>
+                </a>
+            </div>
+
+            <div class="create menu-form-peice">
+
+                <form class="menu-form">
+                    <div class="panel-heading-menu">MENU </div>
+                    <div class="panel-heading-menu-sub">RESTAURANT -
+                        <span id="restaurantName"> </span>
+                    </div>
+                    <p>
+                        <br />
+                    </p>
+
+
+                    <div class="form-group">
+                        <label for="menuName">Menu Name</label>
+                        <input type="text" name="menuName" id="menuName" class="create-menuName" autocomplete="off">
+                        <input type="hidden" name="menuId" id="menuId">
+                        <span class="error"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="menuDes">Description</label>
+                        <input type="text" name="menuDes" id="menuDes" class="create-menuDes" autocomplete="off">
+                        <span class="error"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="menuNote">Note</label>
+                        <input type="text" name="menuNote" id="menuNote" class="create-menuNote" autocomplete="off">
+                        <span class="error"></span>
+                    </div>
+                    <div class="form-group">
+                        <p>
+                            <br /> </p>
+                    </div>
+                    <div class="form-group">
+                        <div class="CTA">
+                            <input type="submit" value="CREATE MENU" id="createMenuButton">
+                            <input type="submit" value="SAVE MENU" id="editMenuButton">
+
+                        </div>
+                    </div>
+
+
+
+                </form>
+
+
+
+
+
+            </div>
+
+
+
+
+
+
+        </div>
+
+
+
+        <div class="col-sm-3 form"></div>
+    </div>
+
+    <div class="row brand" id="menuItemView">
+        <div class="col-sm-3 form"></div>
+        <div class="col-sm-6 form">
+            <div class="menus" id="menuitems">
+                <div>
+                    <a href="">
+                        <span class="menuItemBackButton">
+                            <i class="fas fa-caret-left"></i>BACK</span>
+                    </a>
+                </div>
+                <div class="panel panel-menu">
+                    <div class="panel-heading-menu-sub">
+                        <span id="menuItemsRestaurant"></span> -
+                        <span id="menuItemsRestaurantMenu"></span>
+                        <br /> MENU ITEMS
+                        <a id="addMenuItemIcon" href="" class="pull-right add-edit-app">
+                            <i class="fa fa-plus-square fa-lg"></i>
+                        </a>
+                    </div>
+                    <div class="panel-body">
+                    </div>
+                    <ul class="list-group" id="menuItemList">
+                    </ul>
+
+
+                </div>
+            </div>
+
+        </div>
+        <div class="col-sm-3 form"></div>
+
+    </div>
+    <div class="row brand" id="menuItemCreateView">
+        <div class="col-sm-2 form">
+        </div>
+        <div class="col-sm-8 form">
+            <div>
+                <a href="">
+                    <span class="backButton" id="menuItemViewBackButton">
+                        <i class="fas fa-caret-left"></i>BACK</span>
+                </a>
+            </div>
+            <div class="col-12 col-sm-12" style="background:#465f75;min-height: 600px">
+
+                <div class="row">
+                    <div class="panel-heading-menu">MENU ITEM DETAILS</div>
+                    <!--Menu Item Group  -->
+                    <div class="col-12 col-sm-12" style="background:#465f75;min-height: 120px;">
+                        <div class="panel-heading-menuitem-sub">MENU ITEM GROUP</div>
+
+                        <div class="row">
+                            <div class="col-3 col-sm-3">
+                                <form>
+                                    <div class="form-group">
+                                        <label for="menuItemGroup"></label>
+                                        <select class="form-control" id="menuItemGroup" name="menuItemGroup">
+
+
+
+                                        </select>
+                                        <span class="error"></span>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-4 col-sm-4">
+                                <div>
+
+                                    <a id="addNewMenuItemGroup" href="#" class="pull-left add-edit-app">
+                                        <i class="fa fa-plus-square fa-lg"></i>
+                                    </a>
+
+                                </div>
+                                <div id="newMenuItemGroupEnterDiv">
+                                    <form>
+                                        <div class="pull-left">
+                                            <label for="newMenuItemGroupName">Group Name</label>
+                                            <input type="text" name="newMenuItemGroupName" id="newMenuItemGroupName"
+                                                class="create-newMenuItemGroupName" autocomplete="off">
+                                            <span class="error"></span>
+                                        </div>
+
+                                        <div class="CTA">
+                                            <input type="submit" value="ADD GROUP" id="createNewMenuItemGroupButton">
+
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="col-3 col-sm-3">
+                                <form class="left-align">
+
+                                </form>
+                            </div>
+                            <div class="col-2 col-sm-2">
+
+                            </div>
+
+                        </div>
+
+
+
+                    </div>
+                    <!--End Menu Item Group  -->
+
+                    <div class="col-12 col-sm-12" style="background:#465f75;min-height: 120px;">
+                        <div class="panel-heading-menuitem-sub">MENU ITEM BASIC INFO</div>
+
+                        <div class="row">
+
+                            <div class="col-4 col-sm-4">
+                                <form>
+                                    <div class="form-group">
+                                        <label for="menuItemName">Menu Item Name</label>
+                                        <input type="text" name="menuItemName" id="menuItemName"
+                                            class="create-menuItemName" autocomplete="off">
+                                        <span class="error"></span>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-4 col-sm-4">
+                                <form>
+                                    <div class="form-group">
+                                        <label for="menuItemDes">Description</label>
+                                        <input type="text" name="menuItemDes" id="menuItemDes"
+                                            class="create-menuItemDes" autocomplete="off">
+                                        <span class="error"></span>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-4 col-sm-4">
+                                <form>
+                                    <div class="form-group">
+                                        <label for="menuItemNote">Note</label>
+                                        <input type="text" name="menuItemNote" id="menuItemNote"
+                                            class="create-menuItemNote" autocomplete="off">
+                                        <span class="error"></span>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-12 col-sm-12" style="background:#465f75;min-height: 120px;">
+                        <div class="panel-heading-menuitem-sub">MENU ITEM CATEGORY</div>
+
+                        <div class="row">
+
+                            <div class="col-3 col-sm-3">
+
+                                <form>
+                                    <div class="form-group" id="menuItemCategoryDiv1">
+                                        <div class="pulldown-caption">Category Level 1</div>
+                                        <label for="menuItemCategory" class=""></label>
+                                        <select class="form-control" id="menuItemCategory1" name="menuItemCategory1">
+                                        </select>
+                                        <span class="error"></span>
+                                    </div>
+                                </form>
+
+                            </div>
+                            <div class="col-3 col-sm-3">
+
+                                <form>
+                                    <div class="form-group" id="menuItemCategoryDiv2">
+                                        <div class="pulldown-caption">Category Level 2</div>
+                                        <label for="menuItemCategory2"></label>
+                                        <select class="form-control" id="menuItemCategory2" name="menuItemCategory2">
+
+
+
+                                        </select>
+                                        <span class="error"></span>
+                                    </div>
+                                </form>
+
+                            </div>
+
+                            <div class="col-3 col-sm-3">
+                                <form>
+                                    <div class="form-group" id="menuItemCategoryDiv3">
+                                        <div class="pulldown-caption">Category Level 3</div>
+                                        <label for="menuItemCategory3"></label>
+                                        <select class="form-control" id="menuItemCategory3" name="menuItemCategory3">
+
+
+
+                                        </select>
+                                        <span class="error"></span>
+                                    </div>
+                                </form>
+
+                            </div>
+                            <div class="col-3 col-sm-3">
+                                <form>
+                                    <div class="form-group" id="menuItemCategoryDiv4">
+                                        <div class="pulldown-caption">Category Level 4</div>
+                                        <label for="menuItemCategory4"></label>
+                                        <select class="form-control" id="menuItemCategory4" name="menuItemCategory4">
+
+
+
+                                        </select>
+                                        <span class="error"></span>
+                                    </div>
+                                </form>
+
+                            </div>
+
+                        </div>
+
+
+
+
+                    </div>
+
+
+
+
+                    <div class="col-12 col-sm-12" style="background:#465f75;min-height: 50px;">
+                        <div class="panel-heading-menuitem-sub">MENU ITEM ATTRIBUTES</div>
+                    </div>
+
+                    <div id="fixedMenuItemCategoryDiv">
+
+                    </div>
+
+                    <div>
+                        Menu Item Image<input type="file" id="menuItemImage">
+                    </div>
+
+
+                    <div class="col-12 col-sm-12" style="background:#465f75;min-height: 100px">
+                        <form class="basic-form">
+                            <div class="CTA">
+                                <input type="submit" value="ADD MENU ITEM" id="createMenuItemButton">
+
+                            </div>
+                        </form>
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-2 form">
+        </div>
+
+
+    </div>
+</section>

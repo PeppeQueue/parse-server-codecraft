@@ -1,0 +1,46 @@
+<html lang="en">
+
+<head>
+  <% include ../partials/head %>
+  
+  <script type="text/javascript">
+
+    $(document).ready(function () {
+        Dashboard.init();
+        Restaurant.init();
+    });
+</script>
+</head>
+
+<header class="styles__container" role="navigation">
+  <% include ../partials/header %>
+</header>
+
+<div class="container main" id="restaurant-container">
+  <% include ../partials/restaurant %>
+</div>
+
+<div class="container main" id="menu-container">
+  <% include ../partials/menu %>
+</div>
+
+<div class="container main" id="orders-container">
+  <% include ../partials/order %>
+</div>
+
+<div class="container main" id="workers-container">
+  <% include ../partials/worker %>
+</div>
+
+
+<div class="container main" id="reports-container">
+  <% include ../partials/report %>
+</div>
+
+
+
+<footer>
+  <% include ../partials/footer %>
+</footer>
+
+</html>

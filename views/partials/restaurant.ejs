@@ -1,0 +1,282 @@
+<section id="formHolder">
+
+    <div class="row brand" id="restaurantView">
+        <div>
+            <div class="col-sm-3 form">
+            </div>
+
+            <div class="col-sm-6 form">
+                <div class="menus" id="restaurants">
+                    <div class="panel panel-restaurant">
+                        <div class="panel-heading-restaurant">
+                            RESTAURANTS
+                            <a id="addRestaurantIcon" href="" class="pull-right add-edit-app">
+                                <i class="fa fa-plus-square fa-lg"></i>
+                            </a>
+                        </div>
+                        <div class="panel-body">
+
+
+                            <div class="search-panel" style="display: none;">
+                                <input type="email" class="form-control" id="searchRestaurant" placeholder="Search">
+                            </div>
+                        </div>
+                        <ul class="list-group" id="restaurantList">
+
+
+                        </ul>
+                    </div>
+                    <ul class="pagination pagination-sm pull-right" id="applications-pagination">
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="col-sm-3 form">
+            </div>
+        </div>
+    </div>
+
+    <!-- Form Box -->
+    <div class="row brand" id="restaurantCreateView">
+        <div>
+            <div class="col-sm-2 form"></div>
+            <div class="col-sm-9 form">
+                <div>
+                    <a href="">
+                        <span class="backButton" id="restaurantCreateViewBackButton">
+                            <i class="fas fa-caret-left"></i>BACK</span>
+                    </a>
+                </div>
+                <div id="emptyRestaurant" class="empty">
+                    SELECT RESTAURANT TO VIEW INFORMATION
+                    <span> OR CREATE NEW</span>
+                    <i class="fas fa-hand-point-left fa-3x animated infinite bounce "></i>
+                </div>
+                <!-- Login Form -->
+
+                <div class="create form-peice" style="display: none">
+                    <div class="col-sm">
+                        <form class="basic-form" action="#" method="post" id="createForm">
+
+                            <div class="form-group">
+                                <span class="text-white" align="left" id="createMessage">General Information </span>
+                            </div>
+
+                            <!-- <div class="center-block loader " id="loader"></div> -->
+                            <div class="form-group">
+                                <label for="name">Name</label>
+                                <input type="text" name="name" id="name" class="create-name" autocomplete="off">
+                                <input type="hidden" name="id" id="id" class="create-id" autocomplete="off">
+                                <input type="hidden" name="contactId" id="contactId" autocomplete="off">
+                                <input type="hidden" name="addressId" id="addressId" autocomplete="off">
+                                <span class="error"></span>
+                            </div>
+                            <div>
+                                <span class="	glyphicon glyphicon-user label-icon"> </span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="description"> Description</label>
+                                <input type="text" name="description" id="description" class="create-description"
+                                    autocomplete="off">
+                                <span class="error"></span>
+                            </div>
+                            <div>
+                                <span class="glyphicon glyphicon-list-alt label-icon"> </span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="note"> Note -
+                                    <small>Optional</small>
+                                </label>
+                                <input type="text" name="note" id="note" class="create-note" autocomplete="off">
+                                <span class="error"></span>
+                            </div>
+                            <div>
+                                <span class="glyphicon glyphicon-list-alt label-icon"> </span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="cuisineStyle" class="active"> Cuisine - OPTIONAL</label>
+                                <select class="form-control create-cuisine" id="cuisineStyle"
+                                    name="cuisineStyle"></select>
+                                <span class="error"></span>
+                            </div>
+                            <div>
+                                <span class="glyphicon glyphicon-list-alt label-icon"> </span>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="ambienceStyle" class="active"> AMBIENCE STYLE - OPTIONAL</label>
+                                <select class="form-control create-ambienceStyle" id="ambienceStyle"
+                                    name="ambienceStyle"></select>
+                                <span class="error"></span>
+                            </div>
+                            <div>
+                                <span class="glyphicon glyphicon-list-alt label-icon"> </span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="serviceStyle" class="active"> SERVICE STYLE - OPTIONAL</label>
+                                <select class="form-control create-serviceStyle" id="serviceStyle"
+                                    name="serviceStyle"></select>
+                                <span class="error"></span>
+                            </div>
+                            <div>
+                                <span class="glyphicon glyphicon-list-alt label-icon"> </span>
+                            </div>
+
+
+
+                            <div class="CTA">
+                                <input type="submit" value="CREATE" id="createRestaurantButton">
+
+                            </div>
+                            <div class="CTA edit-button">
+                                <input type="submit" value="SAVE" id="editRestaurantButton">
+                            </div>
+
+
+
+
+
+                        </form>
+                    </div>
+
+                    <div class="col-sm">
+                        <form class="address-form" action="#" method="post" id="signInForm2">
+
+                            <div class="form-group">
+                                <span class="text-white" align="left" id="locationLabel">Restaurant Location </span>
+                            </div>
+                            <div class="form-group">
+                                <label for="country" class="active"> Country</label>
+                                <select class="form-control create-country" id="country" name="country"></select>
+                                <span class="error"></span>
+                            </div>
+                            <div>
+                                <span class="glyphicon glyphicon-pushpin label-icon"> </span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="state" class="active"> State</label>
+                                <select class="form-control create-state" name="state" id="state"></select>
+                                <span class="error"></span>
+                            </div>
+                            <div>
+                                <span class="glyphicon glyphicon-pushpin label-icon"> </span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="city">City</label>
+                                <input type="text" name="city" id="city" class="create-city" autocomplete="off">
+                                <span class="error"></span>
+                            </div>
+                            <div>
+                                <span class="glyphicon glyphicon-pushpin label-icon"> </span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="zipcode">ZipCode
+
+                                </label>
+                                <input type="text" name="zipcode" id="zipcode" class="create-zipcode"
+                                    autocomplete="off">
+                                <span class="error"></span>
+                            </div>
+                            <div>
+                                <span class="glyphicon glyphicon-pushpin label-icon"> </span>
+                            </div>
+
+
+
+                            <div class="form-group">
+                                <label for="addressline1">Address</label>
+                                <input type="text" name="addressline1" id="addressline1" class="create-addressline1"
+                                    autocomplete="off">
+                                <span class="error"></span>
+                            </div>
+                            <div>
+                                <span class="glyphicon glyphicon-pushpin label-icon"> </span>
+                            </div>
+
+
+                        </form>
+                    </div>
+
+                    <div class="col-sm">
+                        <form class="contact-form" action="#" method="post" id="signInForm3">
+
+                            <div class="form-group">
+                                <span class="text-white" align="left" id="contactLabel">Restaurant Contact </span>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="contactName">Contact Name
+
+                                </label>
+                                <input type="text" name="contactName" id="contactName" class="create-contactName"
+                                    autocomplete="off">
+                                <span class="error"></span>
+                            </div>
+                            <div>
+                                <span class="glyphicon glyphicon-user label-icon"> </span>
+                            </div>
+
+
+
+                            <div class="form-group">
+                                <label for="contactPhone">Phone </label>
+                                <input type="text" name="contactPhone" id="contactPhone" class="create-contactPhone"
+                                    autocomplete="off">
+                                <span class="error"></span>
+                            </div>
+                            <div>
+                                <span class="glyphicon glyphicon-phone label-icon"> </span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="contactEmail"> Email -
+                                    <small>Optional</small>
+                                </label>
+                                <input type="text" name="contactEmail" id="contactEmail" class="create-contactEmail"
+                                    autocomplete="off">
+                                <span class="error"></span>
+                            </div>
+                            <div>
+                                <span class="glyphicon glyphicon-envelope label-icon"> </span>
+                            </div>
+
+                            <div class="form-group">
+                                <div>
+                                    <br />
+                                </div>
+
+                            </div>
+
+                            <div class="form-group">
+                                <span class="text-white" align="left">Restaurant Image </span>
+                                <div>
+                                    <input type="file" id="restaurantImage">
+                                </div>
+                            </div>
+
+
+                        </form>
+                    </div>
+
+
+                </div>
+                <!-- End Login Form -->
+            </div>
+            <div class="col-sm-1 form"></div>
+        </div>
+
+
+
+
+    </div>
+</section>

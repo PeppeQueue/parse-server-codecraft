@@ -1,0 +1,57 @@
+<html lang="en">
+
+<head>
+    
+  <% include ../partials/login-head %>
+  <link rel="stylesheet" href="/public/assets/css/login.css">
+  <script type="text/javascript">
+    $(document).ready(function () {     
+      $(".sign-in").click(function () {
+        window.location.href = "/";
+      });
+  
+    });
+  </script>
+</head>
+
+<header class="styles__container" role="navigation">
+  <% include ../partials/login-header %>
+</header>
+
+
+
+<div class="container">
+  <section id="formHolder">
+
+    <div class="row">
+
+      <!-- Brand Box -->
+      <div class="col-sm-12 brand">
+
+
+        <div class="heading">
+          <a href="/dashboard" class="logo">PEPPE <span>Q</span></a>
+          <p>Our Pricing and Plans</p>
+        </div>
+
+
+      </div>
+
+
+
+
+
+    </div>
+
+  </section>
+
+
+</div>
+
+
+<footer>
+  <% include ../partials/login-footer %>
+</footer>
+
+
+</html>
