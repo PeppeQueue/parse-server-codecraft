@@ -1,0 +1,71 @@
+{
+  "addons": [
+    "mailgun",
+    "mongolab",
+    "papertrail"
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ],
+  "env": {
+    "APP_ID": {
+      "required": true
+    },
+    "EMAIL_FROM": {
+      "required": true
+    },
+    "MAILGUN_API_KEY": {
+      "required": true
+    },
+    "MAILGUN_DOMAIN": {
+      "required": true
+    },
+    "MAILGUN_PUBLIC_KEY": {
+      "required": true
+    },
+    "MAILGUN_SMTP_LOGIN": {
+      "required": true
+    },
+    "MAILGUN_SMTP_PASSWORD": {
+      "required": true
+    },
+    "MAILGUN_SMTP_PORT": {
+      "required": true
+    },
+    "MAILGUN_SMTP_SERVER": {
+      "required": true
+    },
+    "MASTER_KEY": {
+      "required": true
+    },
+    "MONGODB_URI": {
+      "required": true
+    },
+    "PAPERTRAIL_API_TOKEN": {
+      "required": true
+    },
+    "S3_ACCESS_KEY": {
+      "required": true
+    },
+    "S3_BUCKET": {
+      "required": true
+    },
+    "S3_SECRET_KEY": {
+      "required": true
+    },
+    "SERVER_URL": {
+      "required": true
+    }
+  },
+  "formation": {
+    "web": {
+      "quantity": 1
+    }
+  },
+  "name": "parse-server-pq-biz",
+  "scripts": {
+  },
+  "stack": "heroku-18"
+}
