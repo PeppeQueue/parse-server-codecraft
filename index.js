@@ -90,7 +90,7 @@ const port = process.env.PORT || 1337;
 const httpServer = require('http').createServer(app);
 
 httpServer.listen(port, () => {
-	console.log(`parse-server-example running on port ${port}.`);
+	console.log(`peppeq parse backend server running on port ${port}.`);
 });
 
 
