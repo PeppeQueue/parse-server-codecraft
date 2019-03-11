@@ -1,11 +1,11 @@
 {
-   "name": "parse-server-codecraft",
+   "name": "parse-server-peppeq",
    "version": "1.4.0",
-   "description": "An example Parse API server using the parse-server module",
+   "description": "PeppeQ Parse API server",
    "main": "index.js",
    "repository": {
       "type": "git",
-      "url": "https://github.com/jawache/parse-server-example"
+      "url": "https://github.com/PeppeQueue/parse-server-pq-biz"
    },
    "license": "MIT",
    "dependencies": {
