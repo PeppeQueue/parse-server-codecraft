@@ -1,0 +1,223 @@
+<html lang="en">
+
+
+<head>
+  <% include ../partials/login-head %>
+  <link rel="stylesheet" href="/public/assets/css/login.css">
+  <script type="text/javascript">
+    $(document).ready(function () {
+      Login.init();
+      $(".sign-in").click(function () {
+        window.location.href = "/";
+      });
+  
+    });
+  </script>
+</head>
+
+
+<header class="styles__container" role="navigation">
+  <% include ../partials/login-header %>
+
+</header>
+
+
+
+<div class="container">
+
+  <section id="formHolder">
+
+    <div class="row">
+
+      <!-- Brand Box -->
+      <div class="col-sm-6 brand">
+
+
+        <div class="heading">
+          <a href="#" class="logo">PEPPE <span>Q</span></a>
+          <p>Your Right Choice</p>
+        </div>
+
+        <div class="success-msg">
+          <p>Great! Please confirm your email address to complete your membership.</p>
+          <a href="#" class="profile">SignIn</a>
+        </div>
+      </div>
+
+
+      <!-- Form Box -->
+      <div class="col-sm-6 form" id="signInDiv">
+
+        <!-- Login Form -->
+        <div class="login form-peice">
+          <form class="login-form" action="#" method="post" id="signInForm">
+            <div class="form-group">
+              <span class="text-error" align="left" id="signInMessage">Invalid Username or Password</span>
+            </div>
+
+            <div class="center-block loader " id="loader"></div>
+            <div class="form-group">
+
+              <label for="signInEmail">Email Adderss</label>
+              <input type="email" name="signInEmail" id="signInEmail" class="signin-email" autocomplete="off">
+              <span class="error"></span>
+            </div>
+            <div>
+              <span class="glyphicon glyphicon-envelope label-icon"> </span>
+            </div>
+            <div class="form-group">
+              <label for="signInPassword"> Password</label>
+              <input type="password" name="signInPassword" id="signInPassword" class="signin-pass" autocomplete="off">
+              <span class="error"></span>
+            </div>
+            <div>
+              <span class="glyphicon glyphicon-wrench label-icon"> </span>
+            </div>
+
+            <div class="CTA">
+              <input type="submit" value="SignIn" id="signInButton">
+              <a href="#" class="switch" id="signUpLink">SIGN UP</a>
+            </div>
+
+            <div class="CTA">
+              Having trouble signing in?
+              <a href="#" class="switch" id="forgotPasswordLink">Forgot Your Password</a>
+            </div>
+          </form>
+        </div><!-- End Login Form -->
+      </div>
+
+
+
+      <div class="col-sm-6 form" id="signUpDiv">
+        <!-- Signup Form -->
+        <div class="signup form-peice">
+          <form class="signup-form" action="#" method="post" id="signUpForm">
+
+            <div class="center-block loader " id="signUpLoader"></div>
+            <div>
+              <span class="text-error" align="left" id="signUpMessage">Invalid Username or Password</span>
+            </div>
+            <div class="form-group">
+
+              <label for="signUpEmail">Email Address</label>
+              <input type="email" name="emailAddress" id="signUpEmail" class="email" autocomplete="off">
+              <span class="error"></span>
+            </div>
+            <div>
+              <span class="glyphicon glyphicon-envelope label-icon"> </span>
+            </div>
+
+            <div class="form-group">
+              <label for="signUpPassword">Password</label>
+              <input type="password" name="password" id="signUpPassword" class="pass" autocomplete="off">
+              <span class="error"></span>
+            </div>
+            <div>
+              <span class="glyphicon glyphicon-wrench label-icon"> </span>
+            </div>
+
+            <div class="form-group">
+              <label for="signUpRepeatPassword">Confirm Password</label>
+              <input type="password" name="passwordCon" id="signUpRepeatPassword" class="passConfirm"
+                autocomplete="off">
+              <span class="error"></span>
+            </div>
+            <div>
+              <span class="glyphicon glyphicon-wrench label-icon"> </span>
+            </div>
+
+
+            <div class="form-group">
+              <label for="signUpName">Full Name</label>
+              <input type="text" name="name" id="signUpName" class="name" autocomplete="off">
+              <span class="error"></span>
+            </div>
+            <div>
+              <span class="glyphicon glyphicon-user label-icon"> </span>
+            </div>
+
+
+
+
+            <div class="form-group">
+              <label for="signUpPhone">Phone Number - <small>Optional</small></label>
+              <input type="number" name="phone" id="signUpPhone" autocomplete="off">
+            </div>
+            <div>
+              <span class="glyphicon glyphicon-earphone label-icon"> </span>
+            </div>
+
+            <div class="form-group">
+              <input type="checkbox" id="signUpTerms" class="label-icon">
+              <span class="error"></span>
+              <span class="signupspan">I accept <a href="/terms" target="_blank">License Agreement</a><span>
+
+            </div>
+            <div>
+
+            </div>
+
+
+
+            <div class="CTA">
+              <input type="submit" value="Signup Now" id="submit">
+              <a href="#" class="switch" id="signInLink">SIGN IN</a>
+            </div>
+          </form>
+        </div><!-- End Signup Form -->
+
+
+      </div>
+
+
+
+      <div class="col-sm-6 form" id="forgotPasswordDiv">
+
+        <!-- Login Form -->
+        <div class="login form-peice">
+          <form class="forgotpassword-form" action="#" method="post" id="forgotPasswordForm">
+            <div class="center-block loader " id="forgotPasswordLoader"></div>
+            <div>
+              <span class="text-error" align="left" id="forgotPasswordMessage">Invalid Username or Password</span>
+            </div>
+            <div class="form-group">
+
+              <label for="forgotPasswordEmail">Email Adderss</label>
+              <input type="email" name="forgotPasswordEmail" id="forgotPasswordEmail" class="forgotpassword-email"
+                autocomplete="off">
+              <span class="error"></span>
+            </div>
+            <div>
+              <span class="glyphicon glyphicon-envelope label-icon"> </span>
+            </div>
+
+
+            <div class="CTA">
+              <input type="submit" value="Reset Password" id="forgotPasswordButton">
+              <a href="#" class="switch" id="signInForgotPasswordForm">SIGN IN</a>
+            </div>
+
+            <div class="CTA">
+
+
+            </div>
+          </form>
+        </div><!-- End Login Form -->
+      </div>
+
+
+
+    </div>
+
+  </section>
+
+
+</div>
+
+
+<footer>
+  <% include ../partials/login-footer %>
+</footer>
+
+</html>

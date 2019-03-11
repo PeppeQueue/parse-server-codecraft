@@ -10,6 +10,7 @@
    "license": "MIT",
    "dependencies": {
       "debug": "^4.1.1",
+      "ejs": "^2.6.1",
       "express": "^4.16.4",
       "kerberos": "~0.0.x",
       "newrelic": "^4.7.0",
@@ -19,10 +20,15 @@
       "stripe": "^6.17.0"
    },
    "scripts": {
-      "start": "node local-index.js",
+      "start": "node index.js",
       "//": "DEBUG=* node index.js"
    },
    "engines": {
       "node": ">=4.3"
+   },
+   "devDependencies": {
+      "eslint": "^5.15.1",
+      "eslint-config-airbnb-base": "^13.1.0",
+      "eslint-plugin-import": "^2.16.0"
    }
 }

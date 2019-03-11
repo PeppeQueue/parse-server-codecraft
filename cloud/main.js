@@ -4,42 +4,17 @@ Parse.Cloud.beforeSave("RestaurantMenuItemGroup", async (request) => {
 
     //check if this is a new or existing item
     if (request.object.isNew()) {
-
         var restaurantMenuItemGroup = Parse.Object.extend("RestaurantMenuItemGroup");
         var query = new Parse.Query(restaurantMenuItemGroup);
         query.select("code");
         query.descending("code");
-
-        var lastItemGroup = await  query.first();
-        console.log("selecred last item group" + JSON.stringify(lastItemGroup) );
+        var lastItemGroup = await  query.first();        
         var newId = lastItemGroup.get("code") + 1;
-        request.object.set("code", newId); 
-        
-        
-
-      /*  query.first().then(
-            function (lastItemGroup) {
-                //increase the code by 1
-                var newId = lastItemGroup.get("code") + 1;
-                request.object.set("code", newId);               
-            },
-            function (error) {
-                throw 'error creating automatic code'; 
-            }
-        );*/
+        request.object.set("code", newId);      
     }
 
 });
 
-readLastInsertedCode = async function (){
-    var restaurantMenuItemGroup = Parse.Object.extend("RestaurantMenuItemGroup");
-    var query = new Parse.Query(restaurantMenuItemGroup);
-    query.select("code");
-    query.descending("code");
-
-    var lastItemGroup =  await query.first();
-    return lastItemGroup;
-};
 
 Parse.Cloud.beforeSave("Worker", function (request) {
 
@@ -52,6 +27,10 @@ Parse.Cloud.beforeSave("Worker", function (request) {
 
 });
 
+/**
+ * Copy Supplied Menu Item Groups in to Restaurant Menu Item Group if they are not already added
+ * 
+ */
 Parse.Cloud.afterSave("RestaurantMenu", function (request) {
 
     var userId = request.object.get("owner").id;
@@ -60,14 +39,14 @@ Parse.Cloud.afterSave("RestaurantMenu", function (request) {
     var menuItemGroupSupplied = Parse.Object.extend("RestaurantMenuItemGroupSupplied");
     var query = new Parse.Query(menuItemGroupSupplied);
 
-
+    // Find all the Supplied Menu Item Groups
     query.find().then(function (results) {
         // Create a trivial resolved promise as a base case.
         let promise = Promise.resolve();
         results.forEach((result) => {
-            // For each item, extend the promise with a function to delete it.
+            // For each item, extend the promise.
             promise = promise.then(() => {
-                // Return a promise that will be resolved when the delete is finished.
+                // Read each and check if its already included in RestaurantMenuItemGroup
                 var name = result.get("name");
                 var display = result.get("display");
                 var note = result.get("note");
